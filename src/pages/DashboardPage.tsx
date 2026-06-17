@@ -1,13 +1,26 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import { ShieldCheck, Clock, AlertCircle, FileSignature, FileText, RefreshCw, Sparkles, ArrowRight, CheckCircle2, Bell, Building2, Calendar, Lock } from 'lucide-react';
+import { ShieldCheck, Clock, AlertCircle, FileSignature, FileText, RefreshCw, Sparkles, ArrowRight, CheckCircle2, Bell, Building2, Calendar, Lock, X, FileCheck, Upload, Phone, Mail } from 'lucide-react';
+
+const REGISTRATION_DATA_KEY = 'corpid_registration_data';
 
 interface Registration {
   refNumber: string;
   companyName: string;
+  brNumber?: string;
+  businessType?: string;
+  email?: string;
+  phone?: string;
   status: 'pending' | 'approved' | 'rejected';
   submittedDate: string;
+}
+
+interface ProfileCompletion {
+  hasEmail: boolean;
+  hasPhone: boolean;
+  hasDocument: boolean;
+  percentage: number;
 }
 
 const DashboardPage = () => {
@@ -15,31 +28,69 @@ const DashboardPage = () => {
   const navigate = useNavigate();
   const [registration, setRegistration] = useState<Registration | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeModal, setActiveModal] = useState<'digitalSign' | 'viewDocs' | 'renewAuth' | null>(null);
+  const [profileCompletion, setProfileCompletion] = useState<ProfileCompletion>({ hasEmail: false, hasPhone: false, hasDocument: false, percentage: 0 });
 
   useEffect(() => {
-    setTimeout(() => {
-      setRegistration({
-        refNumber: 'CORP-2024-ABC12',
+    // Load registration data from localStorage
+    const loadData = () => {
+      const savedData = localStorage.getItem(REGISTRATION_DATA_KEY);
+      if (savedData) {
+        try {
+          const parsed: Registration = JSON.parse(savedData);
+          setRegistration(parsed);
+          // Calculate profile completion
+          const hasEmail = !!parsed.email;
+          const hasPhone = !!parsed.phone;
+          const hasDocument = false; // Would be tracked separately in production
+          const completed = [hasEmail, hasPhone, hasDocument].filter(Boolean).length;
+          setProfileCompletion({ hasEmail, hasPhone, hasDocument, percentage: Math.round((completed / 3) * 100) });
+        } catch {
+          setDemoData();
+        }
+      } else {
+        setDemoData();
+      }
+      setIsLoading(false);
+    };
+
+    const setDemoData = () => {
+      const demoData: Registration = {
+        refNumber: 'CORP-2024-DEMO1',
         companyName: language === 'zh' ? '演示有限公司' : 'Demo Company Limited',
+        brNumber: '12345678',
+        businessType: language === 'zh' ? '有限公司' : 'Limited Company',
+        email: 'demo@example.com',
+        phone: '1234 5678',
         status: 'pending',
         submittedDate: new Date().toISOString(),
-      });
-      setIsLoading(false);
-    }, 800);
+      };
+      setRegistration(demoData);
+      setProfileCompletion({ hasEmail: true, hasPhone: true, hasDocument: false, percentage: 67 });
+    };
+
+    loadData();
   }, [language]);
 
   const getStatusConfig = (status: string) => {
     switch (status) {
-      case 'approved': return { icon: ShieldCheck, bgColor: 'bg-emerald-50', textColor: 'text-emerald-700' };
-      case 'rejected': return { icon: AlertCircle, bgColor: 'bg-red-50', textColor: 'text-red-700' };
-      default: return { icon: Clock, bgColor: 'bg-amber-50', textColor: 'text-amber-700' };
+      case 'approved': return { icon: ShieldCheck, bgColor: 'bg-emerald-50', textColor: 'text-emerald-700', borderColor: 'border-emerald-200' };
+      case 'rejected': return { icon: AlertCircle, bgColor: 'bg-red-50', textColor: 'text-red-700', borderColor: 'border-red-200' };
+      default: return { icon: Clock, bgColor: 'bg-amber-50', textColor: 'text-amber-700', borderColor: 'border-amber-200' };
     }
   };
 
   const actions = [
-    { icon: FileSignature, title: t.dashboard.actions.digitalSign, desc: t.dashboard.actions.digitalSignDesc, color: 'from-blue-500 to-blue-600' },
-    { icon: FileText, title: t.dashboard.actions.viewDocs, desc: t.dashboard.actions.viewDocsDesc, color: 'from-teal-500 to-teal-600' },
-    { icon: RefreshCw, title: t.dashboard.actions.renewAuth, desc: t.dashboard.actions.renewAuthDesc, color: 'from-purple-500 to-purple-600' },
+    { id: 'digitalSign', icon: FileSignature, title: t.dashboard.actions.digitalSign, desc: t.dashboard.actions.digitalSignDesc, color: 'from-blue-500 to-blue-600' },
+    { id: 'viewDocs', icon: FileText, title: t.dashboard.actions.viewDocs, desc: t.dashboard.actions.viewDocsDesc, color: 'from-teal-500 to-teal-600' },
+    { id: 'renewAuth', icon: RefreshCw, title: t.dashboard.actions.renewAuth, desc: t.dashboard.actions.renewAuthDesc, color: 'from-purple-500 to-purple-600' },
+  ];
+
+  // Status timeline steps
+  const timelineSteps = [
+    { key: 'submitted', label: language === 'zh' ? '已提交' : 'Submitted', completed: true },
+    { key: 'processing', label: language === 'zh' ? '處理中' : 'Processing', completed: registration?.status === 'approved' || registration?.status === 'rejected' },
+    { key: 'approved', label: language === 'zh' ? '已核准' : 'Approved', completed: registration?.status === 'approved' },
   ];
 
   if (isLoading) {
@@ -72,7 +123,7 @@ const DashboardPage = () => {
 
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
-            {/* Status Card */}
+            {/* Status Card with Timeline */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold text-slate-800">{t.dashboard.corpIdStatus}</h2>
@@ -83,8 +134,9 @@ const DashboardPage = () => {
                   </span>
                 )}
               </div>
+              
               {registration && (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-teal-100 rounded-xl flex items-center justify-center">
                       <Building2 className="w-6 h-6 text-blue-600" />
@@ -94,6 +146,25 @@ const DashboardPage = () => {
                       <p className="text-sm text-slate-500">{registration.refNumber}</p>
                     </div>
                   </div>
+                  
+                  {/* Status Timeline */}
+                  <div className="py-4">
+                    <div className="flex items-center justify-between relative">
+                      {/* Timeline line */}
+                      <div className="absolute top-5 left-0 right-0 h-0.5 bg-slate-200" />
+                      <div className="absolute top-5 left-0 h-0.5 bg-emerald-500 transition-all duration-500" style={{ width: `${(timelineSteps.filter(s => s.completed).length - 1) * 50}%` }} />
+                      
+                      {timelineSteps.map((step, i) => (
+                        <div key={step.key} className="relative flex flex-col items-center z-10">
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${step.completed ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-400'}`}>
+                            {step.completed ? <CheckCircle2 className="w-5 h-5" /> : <span className="text-sm font-medium">{i + 1}</span>}
+                          </div>
+                          <span className={`mt-2 text-xs font-medium ${step.completed ? 'text-emerald-600' : 'text-slate-400'}`}>{step.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
                   <div className="grid grid-cols-2 gap-4">
                     <div className="p-4 bg-slate-50 rounded-xl">
                       <p className="text-sm text-slate-500 mb-1">{t.dashboard.refNumber}</p>
@@ -115,10 +186,10 @@ const DashboardPage = () => {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
               <h2 className="text-lg font-semibold text-slate-800 mb-4">{t.dashboard.quickActions}</h2>
               <div className="grid sm:grid-cols-3 gap-4">
-                {actions.map((action, i) => {
+                {actions.map((action) => {
                   const Icon = action.icon;
                   return (
-                    <button key={i} className="group p-4 border border-slate-200 rounded-xl text-left hover:border-blue-300 hover:shadow-md transition-all">
+                    <button key={action.id} onClick={() => setActiveModal(action.id as typeof activeModal)} className="group p-4 border border-slate-200 rounded-xl text-left hover:border-blue-300 hover:shadow-md transition-all">
                       <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${action.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                         <Icon className="w-5 h-5 text-white" />
                       </div>
@@ -132,6 +203,37 @@ const DashboardPage = () => {
           </div>
 
           <div className="space-y-6">
+            {/* Profile Completion */}
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+              <h2 className="text-lg font-semibold text-slate-800 mb-4">{language === 'zh' ? '個人檔案完成度' : 'Profile Completion'}</h2>
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-slate-600">{profileCompletion.percentage}%</span>
+                  <span className="text-xs text-slate-400">{language === 'zh' ? '完成' : 'Complete'}</span>
+                </div>
+                <div className="w-full bg-slate-200 rounded-full h-2">
+                  <div className="bg-gradient-to-r from-blue-500 to-teal-500 h-2 rounded-full transition-all duration-500" style={{ width: `${profileCompletion.percentage}%` }} />
+                </div>
+              </div>
+              <ul className="space-y-2">
+                <li className="flex items-center gap-2 text-sm">
+                  <Mail className={`w-4 h-4 ${profileCompletion.hasEmail ? 'text-emerald-500' : 'text-slate-300'}`} />
+                  <span className={profileCompletion.hasEmail ? 'text-slate-800' : 'text-slate-400'}>{language === 'zh' ? '電郵地址' : 'Email Address'}</span>
+                  {profileCompletion.hasEmail && <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />}
+                </li>
+                <li className="flex items-center gap-2 text-sm">
+                  <Phone className={`w-4 h-4 ${profileCompletion.hasPhone ? 'text-emerald-500' : 'text-slate-300'}`} />
+                  <span className={profileCompletion.hasPhone ? 'text-slate-800' : 'text-slate-400'}>{language === 'zh' ? '電話號碼' : 'Phone Number'}</span>
+                  {profileCompletion.hasPhone && <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />}
+                </li>
+                <li className="flex items-center gap-2 text-sm">
+                  <Upload className={`w-4 h-4 ${profileCompletion.hasDocument ? 'text-emerald-500' : 'text-slate-300'}`} />
+                  <span className={profileCompletion.hasDocument ? 'text-slate-800' : 'text-slate-400'}>{language === 'zh' ? '身份證明文件' : 'ID Document'}</span>
+                  {profileCompletion.hasDocument && <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />}
+                </li>
+              </ul>
+            </div>
+
             {/* Reminders */}
             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
               <div className="flex items-center gap-2 mb-4">
@@ -142,7 +244,7 @@ const DashboardPage = () => {
                 {t.dashboard.remindersItems.map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm">
                     <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <CheckCircle2 className="w-3 h-3 text-blue-600" />
+                      <span className="text-xs font-medium text-blue-600">{i + 1}</span>
                     </div>
                     <span className="text-slate-600">{item}</span>
                   </li>
@@ -172,6 +274,94 @@ const DashboardPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Digital Sign Modal */}
+      {activeModal === 'digitalSign' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
+            <button onClick={() => setActiveModal(null)} className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg"><X className="w-5 h-5 text-slate-400" /></button>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-100 to-teal-100 rounded-full flex items-center justify-center">
+                <FileSignature className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800 mb-2">{t.dashboard.actions.digitalSign}</h3>
+              <p className="text-slate-600 mb-6">{language === 'zh' ? '數碼簽署功能即將推出。您將能夠使用 CorpID 安全地簽署文件。' : 'Digital signing feature coming soon. You will be able to securely sign documents using your CorpID.'}</p>
+              <div className="bg-blue-50 rounded-xl p-4 mb-6">
+                <p className="text-sm text-blue-800">{language === 'zh' ? '預計推出時間：2024年第四季度' : 'Expected launch: Q4 2024'}</p>
+              </div>
+              <button onClick={() => setActiveModal(null)} className="w-full py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-medium rounded-xl hover:from-blue-700 hover:to-teal-700 transition-all">{t.common.close}</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* View Documents Modal */}
+      {activeModal === 'viewDocs' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative">
+            <button onClick={() => setActiveModal(null)} className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg"><X className="w-5 h-5 text-slate-400" /></button>
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-teal-100 to-emerald-100 rounded-xl flex items-center justify-center">
+                  <FileText className="w-6 h-6 text-teal-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-slate-800">{t.dashboard.actions.viewDocs}</h3>
+                  <p className="text-sm text-slate-500">{language === 'zh' ? '您的文件' : 'Your documents'}</p>
+                </div>
+              </div>
+              
+              <div className="space-y-3 mb-6">
+                {registration && (
+                  <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                    <div className="flex items-center gap-3">
+                      <FileCheck className="w-5 h-5 text-emerald-500" />
+                      <div>
+                        <p className="font-medium text-slate-800 text-sm">{language === 'zh' ? '註冊申請表' : 'Registration Application'}</p>
+                        <p className="text-xs text-slate-500">{new Date(registration.submittedDate).toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                    <span className="text-xs px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full">{language === 'zh' ? '已提交' : 'Submitted'}</span>
+                  </div>
+                )}
+                
+                <div className="flex items-center justify-between p-4 border-2 border-dashed border-slate-200 rounded-xl">
+                  <div className="flex items-center gap-3">
+                    <Upload className="w-5 h-5 text-slate-400" />
+                    <div>
+                      <p className="font-medium text-slate-600 text-sm">{language === 'zh' ? '上傳新文件' : 'Upload new document'}</p>
+                      <p className="text-xs text-slate-400">{language === 'zh' ? 'JPG, PNG, PDF (最大 5MB)' : 'JPG, PNG, PDF (max 5MB)'}</p>
+                    </div>
+                  </div>
+                  <button className="text-blue-600 text-sm font-medium hover:underline">{language === 'zh' ? '選擇' : 'Select'}</button>
+                </div>
+              </div>
+              
+              <button onClick={() => setActiveModal(null)} className="w-full py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-medium rounded-xl hover:from-blue-700 hover:to-teal-700 transition-all">{t.common.close}</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Renew Authorization Modal */}
+      {activeModal === 'renewAuth' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
+            <button onClick={() => setActiveModal(null)} className="absolute top-4 right-4 p-2 hover:bg-slate-100 rounded-lg"><X className="w-5 h-5 text-slate-400" /></button>
+            <div className="text-center">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-full flex items-center justify-center">
+                <RefreshCw className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800 mb-2">{t.dashboard.actions.renewAuth}</h3>
+              <p className="text-slate-600 mb-6">{language === 'zh' ? '授權續期功能即將推出。您將能夠更新和管理您的授權代表。' : 'Authorization renewal feature coming soon. You will be able to update and manage your authorized representatives.'}</p>
+              <div className="bg-purple-50 rounded-xl p-4 mb-6">
+                <p className="text-sm text-purple-800">{language === 'zh' ? '預計推出時間：2024年第四季度' : 'Expected launch: Q4 2024'}</p>
+              </div>
+              <button onClick={() => setActiveModal(null)} className="w-full py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white font-medium rounded-xl hover:from-blue-700 hover:to-teal-700 transition-all">{t.common.close}</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

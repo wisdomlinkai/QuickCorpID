@@ -21,7 +21,7 @@ export const translations = {
     register: {
       title: 'CorpID Registration', subtitle: 'Get your business registered',
       steps: { step1: 'Business Info', step2: 'ID Verification', step3: 'Role & Auth', step4: 'Review' },
-      step1: { title: 'Business Information', subtitle: 'Enter company details', brNumber: 'Business Registration Number', brNumberPlaceholder: 'e.g., 12345678', brNumberHint: '8-digit number from BR Certificate', companyName: 'Company Name', companyNameEn: 'Company Name (English)', companyNameZh: 'Company Name (Chinese)', businessType: 'Business Type', businessTypePlaceholder: 'Select type', businessTypes: ['Limited Company', 'Sole Proprietorship', 'Partnership', 'Branch Office'] },
+      step1: { title: 'Business Information', subtitle: 'Enter company details', brNumber: 'Business Registration Number', brNumberPlaceholder: 'e.g., 12345678', brNumberHint: '8-digit number from BR Certificate', companyName: 'Company Name', companyNameEn: 'Company Name (English)', companyNameZh: 'Company Name (Chinese)', businessType: 'Business Type', businessTypePlaceholder: 'Select type', businessTypes: ['Limited Company', 'Sole Proprietorship', 'Partnership', 'Branch Office'], email: 'Email Address', phone: 'Phone Number' },
       step2: { title: 'Identity Verification', subtitle: 'Verify your identity', idType: 'ID Type', idTypes: ['Hong Kong ID Card', 'Passport'], idNumber: 'ID Number', idNumberPlaceholder: 'Enter ID number', idNumberHint: 'HKID format: A123456(7)', uploadDoc: 'Upload Document', dragDrop: 'Drag & drop or click', formats: 'JPG, PNG, PDF (max 5MB)' },
       step3: { title: 'Role & Authorization', subtitle: 'Confirm your role', role: 'Your Role', roles: [
         { value: 'owner', label: 'Owner / Director', desc: 'I am an owner or director' },
@@ -37,7 +37,21 @@ export const translations = {
     about: { title: 'About CorpID QuickStart HK', subtitle: 'Helping Hong Kong businesses go digital', mission: { title: 'Our Mission', desc: 'Making digital government services accessible for every Hong Kong business.' }, whatIsCorpId: { title: 'What is CorpID?', desc: 'CorpID is the Digital Policy Office initiative for secure business digital identity.', benefits: ['Single identity for government services', 'Secure digital signing', 'Streamlined transactions', 'Reduced paperwork'] }, team: { title: 'Built for Hong Kong', desc: 'Bilingual, mobile-friendly solution for local businesses.' }, contact: { title: 'Contact Us', email: 'support@corpidquickstart.hk', phone: '+852 1234 5678' } },
     footer: { product: 'Product', support: 'Support', legal: 'Legal', terms: 'Terms', privacy: 'Privacy', contact: 'Contact', copyright: '© 2024 CorpID QuickStart HK', tagline: 'Digital identity made simple' },
     common: { loading: 'Loading...', error: 'Error', edit: 'Edit', close: 'Close', secure: 'Secure' },
-    errors: { required: 'This field is required', invalidBr: 'Invalid Business Registration Number' },
+    errors: { 
+      required: 'This field is required', 
+      invalidBr: 'Invalid Business Registration Number',
+      invalidEmail: 'Please enter a valid email address',
+      invalidPhone: 'Please enter a valid Hong Kong phone number (e.g., 1234 5678)',
+      invalidHkid: 'Please enter a valid Hong Kong ID format (e.g., A123456(7))',
+      invalidPassport: 'Please enter a valid passport number',
+      fileSizeExceeded: 'File size exceeds 5MB limit',
+      invalidFileType: 'Invalid file type. Please upload JPG, PNG or PDF',
+      termsRequired: 'You must agree to the Terms of Service',
+      authRequired: 'You must confirm your authorization',
+      roleRequired: 'Please select your role',
+      networkError: 'Network error. Please try again.',
+      submissionFailed: 'Submission failed. Please try again.'
+    },
   },
   zh: {
     nav: { home: '首頁', register: '註冊', dashboard: '儀表板', pricing: '定價', about: '關於我們' },
@@ -61,7 +75,7 @@ export const translations = {
     register: {
       title: 'CorpID 註冊', subtitle: '開始註冊您的企業',
       steps: { step1: '企業資料', step2: '身份驗證', step3: '角色授權', step4: '審核提交' },
-      step1: { title: '企業資料', subtitle: '輸入公司資料', brNumber: '商業登記號碼', brNumberPlaceholder: '例如：12345678', brNumberHint: '商業登記證上的8位數字', companyName: '公司名稱', companyNameEn: '公司名稱（英文）', companyNameZh: '公司名稱（中文）', businessType: '業務類型', businessTypePlaceholder: '選擇類型', businessTypes: ['有限公司', '獨資經營', '合夥業務', '分行'] },
+      step1: { title: '企業資料', subtitle: '輸入公司資料', brNumber: '商業登記號碼', brNumberPlaceholder: '例如：12345678', brNumberHint: '商業登記證上的8位數字', companyName: '公司名稱', companyNameEn: '公司名稱（英文）', companyNameZh: '公司名稱（中文）', businessType: '業務類型', businessTypePlaceholder: '選擇類型', businessTypes: ['有限公司', '獨資經營', '合夥業務', '分行'], email: '電郵地址', phone: '電話號碼' },
       step2: { title: '身份驗證', subtitle: '驗證您的身份', idType: '證件類型', idTypes: ['香港身份證', '護照'], idNumber: '證件號碼', idNumberPlaceholder: '輸入證件號碼', idNumberHint: '格式：A123456(7)', uploadDoc: '上傳證件', dragDrop: '拖放或點擊上傳', formats: 'JPG、PNG、PDF（最大5MB）' },
       step3: { title: '角色及授權', subtitle: '確認您的角色', role: '您的角色', roles: [
         { value: 'owner', label: '擁有人 / 董事', desc: '我是擁有人或董事' },
@@ -77,7 +91,21 @@ export const translations = {
     about: { title: '關於 CorpID QuickStart HK', subtitle: '協助香港企業數碼化', mission: { title: '我們的使命', desc: '讓每間香港企業都能輕易使用政府數碼服務。' }, whatIsCorpId: { title: '甚麼是 CorpID？', desc: 'CorpID 是數碼政策辦公室的企業數碼身份計劃。', benefits: ['單一數碼身份適用政府服務', '安全的數碼簽署', '簡化的商業交易', '減少文書工作'] }, team: { title: '為香港而建', desc: '雙語、流動友善的本地化解決方案。' }, contact: { title: '聯絡我們', email: 'support@corpidquickstart.hk', phone: '+852 1234 5678' } },
     footer: { product: '產品', support: '支援', legal: '法律', terms: '條款', privacy: '私隱', contact: '聯絡', copyright: '© 2024 CorpID QuickStart HK', tagline: '數碼身份變簡單' },
     common: { loading: '載入中...', error: '錯誤', edit: '編輯', close: '關閉', secure: '安全' },
-    errors: { required: '此欄位為必填', invalidBr: '無效的商業登記號碼' },
+    errors: { 
+      required: '此欄位為必填', 
+      invalidBr: '無效的商業登記號碼',
+      invalidEmail: '請輸入有效的電郵地址',
+      invalidPhone: '請輸入有效的香港電話號碼（例如：1234 5678）',
+      invalidHkid: '請輸入有效的香港身份證格式（例如：A123456(7)）',
+      invalidPassport: '請輸入有效的護照號碼',
+      fileSizeExceeded: '檔案大小超過5MB限制',
+      invalidFileType: '無效的檔案類型。請上傳JPG、PNG或PDF',
+      termsRequired: '您必須同意服務條款',
+      authRequired: '您必須確認您的授權',
+      roleRequired: '請選擇您的角色',
+      networkError: '網絡錯誤。請重試。',
+      submissionFailed: '提交失敗。請重試。'
+    },
   },
 };
 
