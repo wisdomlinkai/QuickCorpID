@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import { Building2, CreditCard, FileText, User, Briefcase, Upload, Loader2, ChevronLeft, ChevronRight, CheckCircle2, AlertCircle, Lock, ShieldCheck, X, FileCheck, Mail, Phone, Share2, Copy, Printer, Check, Calendar, Clock } from 'lucide-react';
+import { useAuth } from '../lib/AuthContext';
+import { createApplication, uploadDocument, submitApplicationDb, type ApplicationInsert } from '../lib/aws';
+import { submitApplication as submitToCorpID } from '../services/corpidApi';
+import { Building2, CreditCard, FileText, User, Briefcase, Upload, Loader2, ChevronLeft, ChevronRight, CheckCircle2, AlertCircle, Lock, ShieldCheck, X, FileCheck, Mail, Phone, Share2, Copy, Printer, Check, Calendar, Clock, LogIn } from 'lucide-react';
 import { generateQRCodeDataUrl } from '../utils/qrcode';
 import { validateHKIDFormat, verifyBRNumber } from '../services/corpidApi';
 
@@ -25,6 +28,7 @@ const formatPhone = (v: string): string => { const c = v.replace(/\D/g, ''); ret
 const RegisterPage = () => {
   const { t, language } = useLanguage();
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [step, setStep] = useState(1);
@@ -38,6 +42,7 @@ const RegisterPage = () => {
   const [copied, setCopied] = useState(false);
   const [checklist, setChecklist] = useState<boolean[]>([false, false, false]);
   const [brVerification, setBrVerification] = useState<{ loading: boolean; valid: boolean | null; company?: string }>({ loading: false, valid: null });
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
   const [formData, setFormData] = useState<FormData>(() => {
     const saved = localStorage.getItem(FORM_STORAGE_KEY);
@@ -157,17 +162,134 @@ const RegisterPage = () => {
 
   const handleSubmit = async () => {
     if (!validate(3)) return;
+    
+    // Check if user is authenticated
+    if (!user) {
+      // Store form data and redirect to login
+      localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
+      setShowLoginPrompt(true);
+      return;
+    }
+    
     setIsSubmitting(true);
-    await new Promise(r => setTimeout(r, 2500));
-    const generatedRef = `CORP-${new Date().getFullYear()}-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-    setRefNumber(generatedRef);
-    // Generate QR code
-    const qrUrl = generateQRCodeDataUrl(generatedRef, 150);
-    setQrCodeUrl(qrUrl);
-    localStorage.setItem(REGISTRATION_DATA_KEY, JSON.stringify({ refNumber: generatedRef, companyName: formData.companyNameEn || formData.companyNameZh, brNumber: formData.brNumber, businessType: formData.businessType, email: formData.email, phone: formData.phone, status: 'pending', submittedDate: new Date().toISOString() }));
-    localStorage.removeItem(FORM_STORAGE_KEY);
-    setIsSubmitting(false);
-    setIsSuccess(true);
+    
+    try {
+      // Get user ID from AWS Cognito
+      const userId = user.userId;
+      
+      // Get user email from form
+      const userEmail = formData.email || '';
+      
+      // Prepare application data
+      const applicationData: ApplicationInsert = {
+        user_id: userId,
+        br_number: formData.brNumber,
+        company_name_en: formData.companyNameEn || undefined,
+        company_name_zh: formData.companyNameZh || undefined,
+        business_type: formData.businessType,
+        id_type: formData.idType === 'Hong Kong ID Card' || formData.idType === '香港身份證' ? 'hkid' : 'passport',
+        id_number: formData.idNumber,
+        applicant_role: formData.role as 'owner' | 'employee' | 'agent',
+        applicant_email: formData.email || userEmail || '',
+        applicant_phone: formData.phone || undefined,
+        status: 'draft',
+      };
+      
+      // Upload document if present
+      let documentUrl: string | undefined;
+      if (formData.uploadedFile) {
+        try {
+          // Convert data URL to File for upload
+          const response = await fetch(formData.uploadedFile.preview || '');
+          const blob = await response.blob();
+          const file = new File([blob], formData.uploadedFile.name, { type: formData.uploadedFile.type });
+          
+          const uploadResult = await uploadDocument(userId, file);
+          if (uploadResult.data) {
+            documentUrl = uploadResult.data.publicUrl;
+            applicationData.document_url = documentUrl;
+          }
+        } catch (uploadError) {
+          console.error('Document upload failed:', uploadError);
+          // Continue without document - it's optional
+        }
+      }
+      
+      // Create application in AWS
+      const { data: application, error: appError } = await createApplication(applicationData);
+      
+      if (appError || !application) {
+        throw new Error(appError?.message || 'Failed to create application');
+      }
+      
+      // Submit to CorpID API (mock or real)
+      const corpIDResult = await submitToCorpID({
+        business: {
+          brNumber: formData.brNumber,
+          companyNameEn: formData.companyNameEn,
+          companyNameZh: formData.companyNameZh,
+          businessType: formData.businessType,
+        },
+        identity: {
+          idType: applicationData.id_type,
+          idNumber: formData.idNumber,
+          documentFile: null,
+        },
+        applicant: {
+          role: applicationData.applicant_role,
+          email: applicationData.applicant_email,
+          phone: formData.phone,
+        },
+        agreeTerms: formData.agreeTerms,
+        authDeclaration: formData.authDeclaration,
+      });
+      
+      if (!corpIDResult.success) {
+        throw new Error(corpIDResult.message || 'CorpID submission failed');
+      }
+      
+      // Update application with reference number
+      const generatedRef = corpIDResult.refNumber || `CORP-${new Date().getFullYear()}-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+      
+      await submitApplicationDb(application.id, generatedRef);
+      
+      setRefNumber(generatedRef);
+      
+      // Generate QR code
+      const qrUrl = generateQRCodeDataUrl(generatedRef, 150);
+      setQrCodeUrl(qrUrl);
+      
+      // Store registration data for dashboard
+      localStorage.setItem(REGISTRATION_DATA_KEY, JSON.stringify({
+        id: application.id,
+        refNumber: generatedRef,
+        companyName: formData.companyNameEn || formData.companyNameZh,
+        brNumber: formData.brNumber,
+        businessType: formData.businessType,
+        email: formData.email || userEmail,
+        phone: formData.phone,
+        status: 'submitted',
+        submittedDate: new Date().toISOString(),
+      }));
+      
+      // Clear form storage
+      localStorage.removeItem(FORM_STORAGE_KEY);
+      setFormData({
+        brNumber: '', companyNameEn: '', companyNameZh: '', businessType: '',
+        email: '', phone: '', idType: language === 'zh' ? '香港身份證' : 'Hong Kong ID Card',
+        idNumber: '', uploadedFile: null, role: '', agreeTerms: false, authDeclaration: false
+      });
+      
+      setIsSuccess(true);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setErrors(prev => ({
+        ...prev,
+        submit: error instanceof Error ? error.message : 'Submission failed. Please try again.',
+      }));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Share functionality
@@ -206,6 +328,49 @@ const RegisterPage = () => {
     const expected = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000); // +3 days
     return { processing, expected };
   };
+
+  // Login prompt modal for unauthenticated users
+  if (showLoginPrompt && !user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-20 flex items-center justify-center">
+        <div className="max-w-md w-full mx-4">
+          <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-blue-100 to-teal-100 rounded-xl flex items-center justify-center">
+              <LogIn className="w-8 h-8 text-blue-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-slate-900 mb-3">
+              {language === 'zh' ? '登入以繼續' : 'Sign In to Continue'}
+            </h2>
+            <p className="text-slate-600 mb-6">
+              {language === 'zh' 
+                ? '請登入或註冊帳戶以提交您的 CorpID 申請。您的表單資料已自動儲存。'
+                : 'Please sign in or create an account to submit your CorpID application. Your form data has been saved.'}
+            </p>
+            <div className="space-y-3">
+              <button
+                onClick={() => navigate('/register?auth=login')}
+                className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all"
+              >
+                {language === 'zh' ? '登入' : 'Sign In'}
+              </button>
+              <button
+                onClick={() => navigate('/register?auth=signup')}
+                className="w-full px-6 py-3 border border-blue-600 text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-all"
+              >
+                {language === 'zh' ? '建立帳戶' : 'Create Account'}
+              </button>
+              <button
+                onClick={() => setShowLoginPrompt(false)}
+                className="w-full px-6 py-2 text-slate-500 hover:text-slate-700 transition-colors"
+              >
+                {language === 'zh' ? '返回' : 'Go Back'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isSuccess) {
     const estimatedDates = getEstimatedDates();
@@ -458,6 +623,30 @@ const RegisterPage = () => {
               <div className="flex items-start gap-3 bg-blue-50 rounded-xl p-4"><Lock className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" /><p className="text-sm text-blue-800">{language === 'zh' ? '您的數據已加密並安全傳輸。' : 'Your data is encrypted and securely transmitted.'}</p></div>
             </div>
           )}
+          
+          {/* Submit Error Display */}
+          {errors.submit && (
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-medium text-red-800">{language === 'zh' ? '提交失敗' : 'Submission Failed'}</p>
+                <p className="text-sm text-red-600 mt-1">{errors.submit}</p>
+              </div>
+            </div>
+          )}
+          
+          {/* Auth status indicator */}
+          {!user && !authLoading && (
+            <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-3">
+              <LogIn className="w-5 h-5 text-amber-600" />
+              <p className="text-sm text-amber-800">
+                {language === 'zh' 
+                  ? '您將需要登入或註冊以提交申請。' 
+                  : 'You will need to sign in or create an account to submit.'}
+              </p>
+            </div>
+          )}
+          
           <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-200">
             <button onClick={() => setStep(Math.max(1, step - 1))} disabled={step === 1} className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-colors ${step === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-100'}`}><ChevronLeft className="w-5 h-5" />{t.register.buttons.back}</button>
             {step < 4 ? (<button onClick={() => { if (validate(step)) setStep(step + 1); }} className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg">{t.register.buttons.next}<ChevronRight className="w-5 h-5" /></button>) : (<button onClick={handleSubmit} disabled={isSubmitting} className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-medium rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all shadow-lg disabled:opacity-70">{isSubmitting ? <><Loader2 className="w-5 h-5 animate-spin" />{t.register.step4.processing}</> : <><CheckCircle2 className="w-5 h-5" />{t.register.step4.submitBtn}</>}</button>)}

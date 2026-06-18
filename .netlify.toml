@@ -1,0 +1,46 @@
+# Netlify Configuration for QuickCorpID
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Directory to publish (Vite outputs to 'dist')
+  publish = "dist"
+  # Build command
+  command = "npm run build"
+
+# Environment variables for production builds
+[build.environment]
+  NODE_VERSION = "20"
+
+# Redirect all routes to index.html for SPA support
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Content Security Policy
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.supabase.co; frame-ancestors 'none';"
+
+# Cache static assets aggressively
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache HTML files less aggressively
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Edge functions for API routes (if needed in future)
+# [functions]
+#   directory = "netlify/functions"

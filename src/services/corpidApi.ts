@@ -2,7 +2,25 @@
  * CorpID Sandbox API Mock Service
  * 
  * This module provides mock implementations of CorpID Sandbox API endpoints.
- * In production, these would be replaced with actual API calls to:
+ * Replace these with actual API calls when integrating with the real CorpID Sandbox.
+ * 
+ * @module services/corpidApi
+ * 
+ * @example
+ * // Submit an application
+ * import { submitApplication } from './services/corpidApi';
+ * 
+ * const result = await submitApplication({
+ *   business: { brNumber: '12345678', companyNameEn: 'Acme Ltd', businessType: 'Limited Company' },
+ *   identity: { idType: 'hkid', idNumber: 'A123456(7)' },
+ *   applicant: { role: 'owner', email: 'user@example.com' },
+ *   agreeTerms: true,
+ *   authDeclaration: true
+ * });
+ * 
+ * @see https://sb.corpid.gov.hk/ for CorpID Sandbox registration
+ * 
+ * API Endpoints (production):
  * - Sandbox: https://sb.corpid.gov.hk/api/
  * - Production: https://api.corpid.gov.hk/
  */
