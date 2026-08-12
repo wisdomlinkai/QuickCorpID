@@ -1,0 +1,28 @@
+{
+  "name": "quickcorpid-infrastructure",
+  "version": "1.0.0",
+  "description": "AWS CDK infrastructure for QuickCorpID",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "synth": "cdk synth",
+    "diff": "cdk diff",
+    "deploy": "cdk deploy",
+    "destroy": "cdk destroy",
+    "bootstrap": "cdk bootstrap"
+  },
+  "keywords": ["aws", "cdk", "infrastructure", "quickcorpid"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "aws-cdk": "^2.0.0",
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}

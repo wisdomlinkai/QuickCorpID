@@ -1,0 +1,774 @@
+{
+  "/AuthServiceStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Environment",
+          "value": "development"
+        },
+        {
+          "key": "ManagedBy",
+          "value": "CDK"
+        },
+        {
+          "key": "Project",
+          "value": "QuickCorpID"
+        }
+      ]
+    }
+  ],
+  "/AuthServiceStack/ApiEndpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiEndpoint"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:144:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/LambdaFunctionName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaFunctionName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:148:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthLambdaRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthLambdaRole36829CEF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:48:28)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthLambda6BB8C88C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:88:31)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:88:31)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApi4BD72F20"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:109:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Endpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiEndpointF49088BF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:109:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:109:5)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthLambda/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthLambdaLogRetention3C91D089"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:88:31)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:88:31)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiDeploymentB62B2E46e56ecd20303b7c6bec5bf8605a0292df"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:109:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/DeploymentStage.v1/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiDeploymentStagev1B7BDC419"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:109:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiOPTIONS3BD43A91"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:109:21)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthCDCDCAC9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:125:39)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthOPTIONSFFC8BF39"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:125:39)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsignupC1AC5BA1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:127:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signin/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsignin291056A9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:129:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/refresh/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthrefresh7D915F99"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:131:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/logout/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthlogout8C905396"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:133:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/me/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthme3B23FF89"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:135:41)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/forgot-password/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthforgotpasswordA9D7297A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:139:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signup/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsignupOPTIONS40C238B5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:127:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signup/POST/ApiPermission.AuthServiceStackAuthApi8E3CD307.POST..auth.signup": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsignupPOSTApiPermissionAuthServiceStackAuthApi8E3CD307POSTauthsignup9D126B24"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:127:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signup/POST/ApiPermission.Test.AuthServiceStackAuthApi8E3CD307.POST..auth.signup": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsignupPOSTApiPermissionTestAuthServiceStackAuthApi8E3CD307POSTauthsignup18E5A2C0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:127:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signup/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsignupPOST854AE523"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:127:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signin/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsigninOPTIONSCAF55F0A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:129:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signin/POST/ApiPermission.AuthServiceStackAuthApi8E3CD307.POST..auth.signin": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsigninPOSTApiPermissionAuthServiceStackAuthApi8E3CD307POSTauthsignin45A55BC4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:129:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signin/POST/ApiPermission.Test.AuthServiceStackAuthApi8E3CD307.POST..auth.signin": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsigninPOSTApiPermissionTestAuthServiceStackAuthApi8E3CD307POSTauthsignin623225B7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:129:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/signin/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthsigninPOSTB415DC06"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:129:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/refresh/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthrefreshOPTIONSA0B83195"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:131:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/refresh/POST/ApiPermission.AuthServiceStackAuthApi8E3CD307.POST..auth.refresh": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthrefreshPOSTApiPermissionAuthServiceStackAuthApi8E3CD307POSTauthrefresh3A60D914"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:131:45)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/refresh/POST/ApiPermission.Test.AuthServiceStackAuthApi8E3CD307.POST..auth.refresh": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthrefreshPOSTApiPermissionTestAuthServiceStackAuthApi8E3CD307POSTauthrefresh37410641"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:131:45)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/refresh/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthrefreshPOST20116D39"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:131:45)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/logout/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthlogoutOPTIONS1E728C70"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:133:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/logout/POST/ApiPermission.AuthServiceStackAuthApi8E3CD307.POST..auth.logout": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthlogoutPOSTApiPermissionAuthServiceStackAuthApi8E3CD307POSTauthlogoutBAB2A0FB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:133:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/logout/POST/ApiPermission.Test.AuthServiceStackAuthApi8E3CD307.POST..auth.logout": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthlogoutPOSTApiPermissionTestAuthServiceStackAuthApi8E3CD307POSTauthlogout885D2E36"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:133:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/logout/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthlogoutPOSTDC87E389"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:133:44)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/me/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthmeOPTIONSCFB647B0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:135:41)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/me/GET/ApiPermission.AuthServiceStackAuthApi8E3CD307.GET..auth.me": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthmeGETApiPermissionAuthServiceStackAuthApi8E3CD307GETauthme3CB10CE9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:136:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/me/GET/ApiPermission.Test.AuthServiceStackAuthApi8E3CD307.GET..auth.me": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthmeGETApiPermissionTestAuthServiceStackAuthApi8E3CD307GETauthme9928E976"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:136:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/me/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthmeGET6BC15DB6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:136:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/me/PUT/ApiPermission.AuthServiceStackAuthApi8E3CD307.PUT..auth.me": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthmePUTApiPermissionAuthServiceStackAuthApi8E3CD307PUTauthme42CF79B4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:137:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/me/PUT/ApiPermission.Test.AuthServiceStackAuthApi8E3CD307.PUT..auth.me": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthmePUTApiPermissionTestAuthServiceStackAuthApi8E3CD307PUTauthme68E30D1D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:137:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/me/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthmePUTFD1752F2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:137:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/forgot-password/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthforgotpasswordOPTIONS815BFA1B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:139:22)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)"
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/forgot-password/POST/ApiPermission.AuthServiceStackAuthApi8E3CD307.POST..auth.forgot-password": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthforgotpasswordPOSTApiPermissionAuthServiceStackAuthApi8E3CD307POSTauthforgotpasswordED4386E1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:139:53)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/forgot-password/POST/ApiPermission.Test.AuthServiceStackAuthApi8E3CD307.POST..auth.forgot-password": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthforgotpasswordPOSTApiPermissionTestAuthServiceStackAuthApi8E3CD307POSTauthforgotpassword127E2E24"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:139:53)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/AuthServiceStack/AuthApi/Default/auth/forgot-password/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthApiauthforgotpasswordPOST32C6EE75"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:139:53)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

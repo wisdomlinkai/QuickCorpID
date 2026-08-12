@@ -1,0 +1,295 @@
+{
+  "/DatabaseSchemaStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Environment",
+          "value": "development"
+        },
+        {
+          "key": "ManagedBy",
+          "value": "CDK"
+        },
+        {
+          "key": "Project",
+          "value": "QuickCorpID"
+        }
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/Vpc": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "fromVpcAttributes: 'availabilityZones' is a list token: the imported VPC will not work with constructs that require a list of subnets at synthesis time. Use 'Vpc.fromLookup()' or 'Fn.importListValue' instead. [ack: @aws-cdk/aws-ec2:vpcAttributeIsListTokenavailabilityZones]",
+      "trace": [
+        "Annotations.addMessage (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:44525)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Vpc2.fromVpcAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:13900)",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:49:26)",
+        "Object.<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "Module._compile (node:internal/modules/cjs/loader:1529:14)",
+        "Module._extensions..js (node:internal/modules/cjs/loader:1613:10)",
+        "Module.load (node:internal/modules/cjs/loader:1275:32)",
+        "Module._load (node:internal/modules/cjs/loader:1096:12)",
+        "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)",
+        "node:internal/main/run_main_module:28:49"
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/VpcForLambda": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "fromVpcAttributes: 'availabilityZones' is a list token: the imported VPC will not work with constructs that require a list of subnets at synthesis time. Use 'Vpc.fromLookup()' or 'Fn.importListValue' instead. [ack: @aws-cdk/aws-ec2:vpcAttributeIsListTokenavailabilityZones]",
+      "trace": [
+        "Annotations.addMessage (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:44525)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Vpc2.fromVpcAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:13900)",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:64:26)",
+        "Object.<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "Module._compile (node:internal/modules/cjs/loader:1529:14)",
+        "Module._extensions..js (node:internal/modules/cjs/loader:1613:10)",
+        "Module.load (node:internal/modules/cjs/loader:1275:32)",
+        "Module._load (node:internal/modules/cjs/loader:1096:12)",
+        "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)",
+        "node:internal/main/run_main_module:28:49"
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/SchemaInitStatus": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchemaInitStatus"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:95:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/LambdaSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaSecurityGroup0BD9FC99"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:48:31)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/VpcForLambda/PrivateSubnet1": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "No routeTableId was provided to the subnet 'subnet-04a07f91847b4d134'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171) [ack: @aws-cdk/aws-ec2:noSubnetRouteTableId]",
+      "trace": [
+        "Annotations.addMessage (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new ImportedSubnet2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:51099)",
+        "new ImportedSubnet2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Subnet2.fromSubnetAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:33113)",
+        "C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\util.js:1:2658",
+        "Array.map (<anonymous>)",
+        "ImportSubnetGroup.import (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\util.js:1:2576)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:45757)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Vpc2.fromVpcAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:13900)",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:64:26)",
+        "Object.<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "Module._compile (node:internal/modules/cjs/loader:1529:14)",
+        "Module._extensions..js (node:internal/modules/cjs/loader:1613:10)",
+        "Module.load (node:internal/modules/cjs/loader:1275:32)",
+        "Module._load (node:internal/modules/cjs/loader:1096:12)",
+        "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)",
+        "node:internal/main/run_main_module:28:49"
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/VpcForLambda/undefinedSubnet2": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "No routeTableId was provided to the subnet 'subnet-0f252ab4bf49d1ee8'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171) [ack: @aws-cdk/aws-ec2:noSubnetRouteTableId]",
+      "trace": [
+        "Annotations.addMessage (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new ImportedSubnet2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:51099)",
+        "new ImportedSubnet2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Subnet2.fromSubnetAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:33113)",
+        "C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\util.js:1:2658",
+        "Array.map (<anonymous>)",
+        "ImportSubnetGroup.import (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\util.js:1:2576)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:45757)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Vpc2.fromVpcAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:13900)",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:64:26)",
+        "Object.<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "Module._compile (node:internal/modules/cjs/loader:1529:14)",
+        "Module._extensions..js (node:internal/modules/cjs/loader:1613:10)",
+        "Module.load (node:internal/modules/cjs/loader:1275:32)",
+        "Module._load (node:internal/modules/cjs/loader:1096:12)",
+        "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)",
+        "node:internal/main/run_main_module:28:49"
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/SchemaInitializer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchemaInitializerD16A50D4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:59:35)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/SchemaResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchemaResource"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new CustomResource2 in aws-cdk-lib...",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:87:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:109:5)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/SchemaInitializer/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchemaInitializerServiceRole4BF1A86E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:59:35)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/SchemaProvider/framework-onEvent/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchemaProviderframeworkonEvent33CC9CF6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Provider2 in aws-cdk-lib...",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:83:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/SchemaInitializer/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchemaInitializerServiceRoleDefaultPolicy234171ED"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...environmentFromArn.grantRead in aws-cdk-lib...",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:77:24)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)"
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/SchemaProvider/framework-onEvent/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchemaProviderframeworkonEventServiceRole112B01E5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Provider2 in aws-cdk-lib...",
+        "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:83:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/DatabaseSchemaStack/SchemaProvider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SchemaProviderframeworkonEventServiceRoleDefaultPolicyB5A9A421"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ]
+}

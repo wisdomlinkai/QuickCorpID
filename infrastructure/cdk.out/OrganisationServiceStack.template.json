@@ -1,0 +1,1483 @@
+{
+ "Description": "QuickCorpID Organisation Service",
+ "Resources": {
+  "LambdaSecurityGroup0BD9FC99": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for organisation service Lambda",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "vpc-0eb147dcef42bb6ae"
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/LambdaSecurityGroup/Resource"
+   }
+  },
+  "OrganisationLambdaServiceRole407AAA2E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/OrganisationLambda/ServiceRole/Resource"
+   }
+  },
+  "OrganisationLambdaServiceRoleDefaultPolicy1E4E5018": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetSecretValue"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:secretsmanager:ap-southeast-1:240966654973:secret:DatabaseSecret86DBB7B3-DiVgdXkHj1O2-r2Oz9D"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "OrganisationLambdaServiceRoleDefaultPolicy1E4E5018",
+    "Roles": [
+     {
+      "Ref": "OrganisationLambdaServiceRole407AAA2E"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/OrganisationLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "OrganisationLambda54563F3C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-240966654973-ap-southeast-1",
+     "S3Key": "1f77a44b35c765eef15759f3a56b8cd51b211cdfc1e371b8abdd6cdb8eb7d28c.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "DATABASE_SECRET_ARN": "arn:aws:secretsmanager:ap-southeast-1:240966654973:secret:DatabaseSecret86DBB7B3-DiVgdXkHj1O2-r2Oz9D",
+      "DATABASE_ENDPOINT": "quickcorpid-databaseb269d8bb-8oydiecqaoh8.cluster-chg6i2wyozug.ap-southeast-1.rds.amazonaws.com:5432",
+      "DATABASE_NAME": "quickcorpid",
+      "USER_POOL_ID": "ap-southeast-1_JLjSrO6V8"
+     }
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "OrganisationLambdaServiceRole407AAA2E",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 30,
+    "VpcConfig": {
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "LambdaSecurityGroup0BD9FC99",
+        "GroupId"
+       ]
+      }
+     ],
+     "SubnetIds": [
+      "subnet-04a07f91847b4d134",
+      "subnet-0f252ab4bf49d1ee8"
+     ]
+    }
+   },
+   "DependsOn": [
+    "OrganisationLambdaServiceRoleDefaultPolicy1E4E5018",
+    "OrganisationLambdaServiceRole407AAA2E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/OrganisationLambda/Resource",
+    "aws:asset:path": "asset.1f77a44b35c765eef15759f3a56b8cd51b211cdfc1e371b8abdd6cdb8eb7d28c",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "RestApi0C43BF4B": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Description": "API for organisation management",
+    "Name": "QuickCorpID Organisation Service"
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Resource"
+   }
+  },
+  "RestApiDeployment180EC503949300d6687fb93ccbfe177476f02133": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "API for organisation management",
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "DependsOn": [
+    "CognitoAuthorizerF3215DBC",
+    "RestApiOPTIONS6AA64D2D",
+    "RestApiorganisationsorgIdDELETE6601814D",
+    "RestApiorganisationsorgIdGETFA9E7F34",
+    "RestApiorganisationsorgIdmembersmemberIdDELETE86C68F8E",
+    "RestApiorganisationsorgIdmembersmemberIdOPTIONS33E721DD",
+    "RestApiorganisationsorgIdmembersmemberIdPUT6EE63A02",
+    "RestApiorganisationsorgIdmembersmemberId32565ED5",
+    "RestApiorganisationsorgIdmembersGET22D6A659",
+    "RestApiorganisationsorgIdmembersOPTIONSB08C68FF",
+    "RestApiorganisationsorgIdmembersPOST6A5800A0",
+    "RestApiorganisationsorgIdmembersB28208CE",
+    "RestApiorganisationsorgIdOPTIONSA519B1BA",
+    "RestApiorganisationsorgIdPUT6635B5CE",
+    "RestApiorganisationsorgIdD1A87150",
+    "RestApiorganisationsGET2E4D0C81",
+    "RestApiorganisationsOPTIONS248596F8",
+    "RestApiorganisationsPOST5C9F9EE7",
+    "RestApiorganisations405490CF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Deployment/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "RestApiDeploymentStagev1FE0EB7F7": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "RestApiDeployment180EC503949300d6687fb93ccbfe177476f02133"
+    },
+    "MethodSettings": [
+     {
+      "DataTraceEnabled": false,
+      "HttpMethod": "*",
+      "MetricsEnabled": true,
+      "ResourcePath": "/*"
+     }
+    ],
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    },
+    "StageName": "v1",
+    "TracingEnabled": true
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/DeploymentStage.v1/Resource"
+   }
+  },
+  "RestApiOPTIONS6AA64D2D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "RestApi0C43BF4B",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/OPTIONS/Resource"
+   }
+  },
+  "RestApiorganisations405490CF": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "RestApi0C43BF4B",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "organisations",
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/Resource"
+   }
+  },
+  "RestApiorganisationsOPTIONS248596F8": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "RestApiorganisations405490CF"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/OPTIONS/Resource"
+   }
+  },
+  "RestApiorganisationsGETApiPermissionOrganisationServiceStackRestApi8418BC31GETorganisations32C39A5A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/GET/organisations"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/GET/ApiPermission.OrganisationServiceStackRestApi8418BC31.GET..organisations"
+   }
+  },
+  "RestApiorganisationsGETApiPermissionTestOrganisationServiceStackRestApi8418BC31GETorganisationsA13BF981": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/GET/organisations"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/GET/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.GET..organisations"
+   }
+  },
+  "RestApiorganisationsGET2E4D0C81": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisations405490CF"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/GET/Resource"
+   }
+  },
+  "RestApiorganisationsPOSTApiPermissionOrganisationServiceStackRestApi8418BC31POSTorganisations842B9574": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/POST/organisations"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/POST/ApiPermission.OrganisationServiceStackRestApi8418BC31.POST..organisations"
+   }
+  },
+  "RestApiorganisationsPOSTApiPermissionTestOrganisationServiceStackRestApi8418BC31POSTorganisations4ECE8DB7": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/POST/organisations"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/POST/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.POST..organisations"
+   }
+  },
+  "RestApiorganisationsPOST5C9F9EE7": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisations405490CF"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/POST/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdD1A87150": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "RestApiorganisations405490CF"
+    },
+    "PathPart": "{orgId}",
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdOPTIONSA519B1BA": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdD1A87150"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/OPTIONS/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdGETApiPermissionOrganisationServiceStackRestApi8418BC31GETorganisationsorgId7FBEE6A7": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/GET/organisations/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/GET/ApiPermission.OrganisationServiceStackRestApi8418BC31.GET..organisations.{orgId}"
+   }
+  },
+  "RestApiorganisationsorgIdGETApiPermissionTestOrganisationServiceStackRestApi8418BC31GETorganisationsorgId48C1B56C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/GET/organisations/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/GET/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.GET..organisations.{orgId}"
+   }
+  },
+  "RestApiorganisationsorgIdGETFA9E7F34": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdD1A87150"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/GET/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdPUTApiPermissionOrganisationServiceStackRestApi8418BC31PUTorganisationsorgId1C14AF0C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/PUT/organisations/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/PUT/ApiPermission.OrganisationServiceStackRestApi8418BC31.PUT..organisations.{orgId}"
+   }
+  },
+  "RestApiorganisationsorgIdPUTApiPermissionTestOrganisationServiceStackRestApi8418BC31PUTorganisationsorgId9B694F99": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/PUT/organisations/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/PUT/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.PUT..organisations.{orgId}"
+   }
+  },
+  "RestApiorganisationsorgIdPUT6635B5CE": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "PUT",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdD1A87150"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/PUT/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdDELETEApiPermissionOrganisationServiceStackRestApi8418BC31DELETEorganisationsorgId93735287": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/DELETE/organisations/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/DELETE/ApiPermission.OrganisationServiceStackRestApi8418BC31.DELETE..organisations.{orgId}"
+   }
+  },
+  "RestApiorganisationsorgIdDELETEApiPermissionTestOrganisationServiceStackRestApi8418BC31DELETEorganisationsorgId581C40DD": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/DELETE/organisations/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/DELETE/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.DELETE..organisations.{orgId}"
+   }
+  },
+  "RestApiorganisationsorgIdDELETE6601814D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "DELETE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdD1A87150"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/DELETE/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdmembersB28208CE": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "RestApiorganisationsorgIdD1A87150"
+    },
+    "PathPart": "members",
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdmembersOPTIONSB08C68FF": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdmembersB28208CE"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/OPTIONS/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdmembersGETApiPermissionOrganisationServiceStackRestApi8418BC31GETorganisationsorgIdmembersDD47EB86": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/GET/organisations/*/members"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/GET/ApiPermission.OrganisationServiceStackRestApi8418BC31.GET..organisations.{orgId}.members"
+   }
+  },
+  "RestApiorganisationsorgIdmembersGETApiPermissionTestOrganisationServiceStackRestApi8418BC31GETorganisationsorgIdmembersE88C2E50": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/GET/organisations/*/members"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/GET/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.GET..organisations.{orgId}.members"
+   }
+  },
+  "RestApiorganisationsorgIdmembersGET22D6A659": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdmembersB28208CE"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/GET/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdmembersPOSTApiPermissionOrganisationServiceStackRestApi8418BC31POSTorganisationsorgIdmembers17A4BE3D": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/POST/organisations/*/members"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/POST/ApiPermission.OrganisationServiceStackRestApi8418BC31.POST..organisations.{orgId}.members"
+   }
+  },
+  "RestApiorganisationsorgIdmembersPOSTApiPermissionTestOrganisationServiceStackRestApi8418BC31POSTorganisationsorgIdmembersA1FB89E5": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/POST/organisations/*/members"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/POST/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.POST..organisations.{orgId}.members"
+   }
+  },
+  "RestApiorganisationsorgIdmembersPOST6A5800A0": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdmembersB28208CE"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/POST/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdmembersmemberId32565ED5": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "RestApiorganisationsorgIdmembersB28208CE"
+    },
+    "PathPart": "{memberId}",
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdmembersmemberIdOPTIONS33E721DD": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdmembersmemberId32565ED5"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/OPTIONS/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdmembersmemberIdPUTApiPermissionOrganisationServiceStackRestApi8418BC31PUTorganisationsorgIdmembersmemberId56D4CF5D": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/PUT/organisations/*/members/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/PUT/ApiPermission.OrganisationServiceStackRestApi8418BC31.PUT..organisations.{orgId}.members.{memberId}"
+   }
+  },
+  "RestApiorganisationsorgIdmembersmemberIdPUTApiPermissionTestOrganisationServiceStackRestApi8418BC31PUTorganisationsorgIdmembersmemberId9D11F78C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/PUT/organisations/*/members/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/PUT/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.PUT..organisations.{orgId}.members.{memberId}"
+   }
+  },
+  "RestApiorganisationsorgIdmembersmemberIdPUT6EE63A02": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "PUT",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdmembersmemberId32565ED5"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/PUT/Resource"
+   }
+  },
+  "RestApiorganisationsorgIdmembersmemberIdDELETEApiPermissionOrganisationServiceStackRestApi8418BC31DELETEorganisationsorgIdmembersmemberId80A72B1C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+       },
+       "/DELETE/organisations/*/members/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/DELETE/ApiPermission.OrganisationServiceStackRestApi8418BC31.DELETE..organisations.{orgId}.members.{memberId}"
+   }
+  },
+  "RestApiorganisationsorgIdmembersmemberIdDELETEApiPermissionTestOrganisationServiceStackRestApi8418BC31DELETEorganisationsorgIdmembersmemberIdCFC73077": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "OrganisationLambda54563F3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:aws:execute-api:ap-southeast-1:240966654973:",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/DELETE/organisations/*/members/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/DELETE/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.DELETE..organisations.{orgId}.members.{memberId}"
+   }
+  },
+  "RestApiorganisationsorgIdmembersmemberIdDELETE86C68F8E": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "COGNITO_USER_POOLS",
+    "AuthorizerId": {
+     "Ref": "CognitoAuthorizerF3215DBC"
+    },
+    "HttpMethod": "DELETE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:apigateway:ap-southeast-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "OrganisationLambda54563F3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiorganisationsorgIdmembersmemberId32565ED5"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/DELETE/Resource"
+   }
+  },
+  "CognitoAuthorizerF3215DBC": {
+   "Type": "AWS::ApiGateway::Authorizer",
+   "Properties": {
+    "IdentitySource": "method.request.header.Authorization",
+    "Name": "OrganisationServiceStackCognitoAuthorizer2D02FBF4",
+    "ProviderARNs": [
+     "arn:aws:cognito-idp:ap-southeast-1:240966654973:userpool/ap-southeast-1_JLjSrO6V8"
+    ],
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    },
+    "Type": "COGNITO_USER_POOLS"
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/CognitoAuthorizer/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WQQU/DMAyFf8vumRmthMRxA40TYurEecpS03lr4yp2mErV/46SDRin99nvyXZSQPFQwmJmzzJ39Wne0h7GrVp3MhUKx+DQ2LPsRnQFjFt0MZAOL4Fjb54+/L/GZFrb7WsL4zp6p8Q+RW55g6EjEWI/GbIdjBW3mIysG27JDTmXaTJS7qwIqsAyiZESVtGdUFdW0NieGqt4tgOMFYoue8qzrviMfctDh15T96baqm3y1gv8vDPPfEU9cJ3MK/3+wmXylbnxpPwuGDbMrSyjHjjQF4YU+6umyeTD0yLyTTLfovZRJ+O5RjjK3WexgPtHKGdHIZqH6JU6hOqi33o6UsKeAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "OrganisationServiceStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "RestApiEndpoint0551178A": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "RestApi0C43BF4B"
+      },
+      ".execute-api.ap-southeast-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "ApiUrl": {
+   "Description": "Organisation Service API URL",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "RestApi0C43BF4B"
+      },
+      ".execute-api.ap-southeast-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "RestApiDeploymentStagev1FE0EB7F7"
+      },
+      "/"
+     ]
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

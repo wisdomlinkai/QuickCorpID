@@ -1,0 +1,9 @@
+{
+  "name": "organisation-service-lambda",
+  "version": "1.0.0",
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.0.0",
+    "pg": "^8.11.0",
+    "zod": "^3.22.0"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093": {
+      "displayName": "QuickCorpIDStack/Custom::VpcRestrictDefaultSGCustomResourceProvider Code",
+      "source": {
+        "path": "asset.02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "240966654973-ap-southeast-1-75f1e688": {
+          "bucketName": "cdk-hnb659fds-assets-240966654973-ap-southeast-1",
+          "objectKey": "02b51ab524e7bcf8f477de3e71e5f9a72e448301b26ba62e9e75a14f9c55a093.zip",
+          "region": "ap-southeast-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::240966654973:role/cdk-hnb659fds-file-publishing-role-240966654973-ap-southeast-1"
+        }
+      }
+    },
+    "0cfda1b52673c7ad514ea28ed7aa34c1a41ac0710ecce94a0c6a1d1d03c1c5d0": {
+      "displayName": "QuickCorpID Template",
+      "source": {
+        "path": "QuickCorpIDStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "240966654973-ap-southeast-1-c20aeac4": {
+          "bucketName": "cdk-hnb659fds-assets-240966654973-ap-southeast-1",
+          "objectKey": "0cfda1b52673c7ad514ea28ed7aa34c1a41ac0710ecce94a0c6a1d1d03c1c5d0.json",
+          "region": "ap-southeast-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::240966654973:role/cdk-hnb659fds-file-publishing-role-240966654973-ap-southeast-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

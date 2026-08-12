@@ -1,0 +1,19 @@
+{
+  "FunctionName": "QuickCorpID-DatabaseInit",
+  "Runtime": "nodejs20.x",
+  "Role": "arn:aws:iam::240966654973:role/QuickCorpID-Organisation-OrganisationLambdaServiceR-zb0eAmyoVSX5",
+  "Handler": "index.handler",
+  "Code": {
+    "S3Bucket": "cdk-hnb659fds-assets-240966654973-ap-southeast-1",
+    "S3Key": "db-init.zip"
+  },
+  "Timeout": 60,
+  "Environment": {
+    "Variables": {
+      "DATABASE_SECRET_ARN": "arn:aws:secretsmanager:ap-southeast-1:240966654973:secret:DatabaseSecret86DBB7B3-DiVgdXkHj1O2-r2Oz9D",
+      "DATABASE_ENDPOINT": "quickcorpid-databaseb269d8bb-8oydiecqaoh8.cluster-chg6i2wyozug.ap-southeast-1.rds.amazonaws.com:5432",
+      "DATABASE_NAME": "quickcorpid"
+    }
+  },
+  "Description": "Initialize QuickCorpID database schema"
+}

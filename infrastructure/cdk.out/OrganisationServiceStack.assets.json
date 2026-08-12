@@ -1,0 +1,36 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "1f77a44b35c765eef15759f3a56b8cd51b211cdfc1e371b8abdd6cdb8eb7d28c": {
+      "displayName": "OrganisationLambda/Code",
+      "source": {
+        "path": "asset.1f77a44b35c765eef15759f3a56b8cd51b211cdfc1e371b8abdd6cdb8eb7d28c",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "240966654973-ap-southeast-1-ba62fe08": {
+          "bucketName": "cdk-hnb659fds-assets-240966654973-ap-southeast-1",
+          "objectKey": "1f77a44b35c765eef15759f3a56b8cd51b211cdfc1e371b8abdd6cdb8eb7d28c.zip",
+          "region": "ap-southeast-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::240966654973:role/cdk-hnb659fds-file-publishing-role-240966654973-ap-southeast-1"
+        }
+      }
+    },
+    "2d22224fed5a543313ad612390dd36b7df72b27a1a51a28d59f7bea07461eeb6": {
+      "displayName": "QuickCorpID-Organisation Template",
+      "source": {
+        "path": "OrganisationServiceStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "240966654973-ap-southeast-1-ab2d4c58": {
+          "bucketName": "cdk-hnb659fds-assets-240966654973-ap-southeast-1",
+          "objectKey": "2d22224fed5a543313ad612390dd36b7df72b27a1a51a28d59f7bea07461eeb6.json",
+          "region": "ap-southeast-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::240966654973:role/cdk-hnb659fds-file-publishing-role-240966654973-ap-southeast-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

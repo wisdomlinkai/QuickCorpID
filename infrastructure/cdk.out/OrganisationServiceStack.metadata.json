@@ -1,0 +1,804 @@
+{
+  "/OrganisationServiceStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Environment",
+          "value": "development"
+        },
+        {
+          "key": "ManagedBy",
+          "value": "CDK"
+        },
+        {
+          "key": "Project",
+          "value": "QuickCorpID"
+        }
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/ApiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:164:13)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/Vpc/PrivateSubnet1": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "No routeTableId was provided to the subnet 'subnet-04a07f91847b4d134'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171) [ack: @aws-cdk/aws-ec2:noSubnetRouteTableId]",
+      "trace": [
+        "Annotations.addMessage (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new ImportedSubnet2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:51099)",
+        "new ImportedSubnet2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Subnet2.fromSubnetAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:33113)",
+        "C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\util.js:1:2658",
+        "Array.map (<anonymous>)",
+        "ImportSubnetGroup.import (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\util.js:1:2576)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:45757)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Vpc2.fromVpcAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:13900)",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:49:29)",
+        "Object.<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "Module._compile (node:internal/modules/cjs/loader:1529:14)",
+        "Module._extensions..js (node:internal/modules/cjs/loader:1613:10)",
+        "Module.load (node:internal/modules/cjs/loader:1275:32)",
+        "Module._load (node:internal/modules/cjs/loader:1096:12)",
+        "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)",
+        "node:internal/main/run_main_module:28:49"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/Vpc/PrivateSubnet2": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "No routeTableId was provided to the subnet 'subnet-0f252ab4bf49d1ee8'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171) [ack: @aws-cdk/aws-ec2:noSubnetRouteTableId]",
+      "trace": [
+        "Annotations.addMessage (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "new ImportedSubnet2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:51099)",
+        "new ImportedSubnet2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Subnet2.fromSubnetAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:33113)",
+        "C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\util.js:1:2658",
+        "Array.map (<anonymous>)",
+        "ImportSubnetGroup.import (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\util.js:1:2576)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:45757)",
+        "new ImportedVpc2 (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\core\\lib\\prop-injectable.js:1:855)",
+        "Vpc2.fromVpcAttributes (C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:13900)",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:49:29)",
+        "Object.<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "Module._compile (node:internal/modules/cjs/loader:1529:14)",
+        "Module._extensions..js (node:internal/modules/cjs/loader:1613:10)",
+        "Module.load (node:internal/modules/cjs/loader:1275:32)",
+        "Module._load (node:internal/modules/cjs/loader:1096:12)",
+        "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)",
+        "node:internal/main/run_main_module:28:49"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/LambdaSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaSecurityGroup0BD9FC99"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:55:31)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/OrganisationLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OrganisationLambda54563F3C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:63:36)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApi0C43BF4B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:99:24)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Endpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiEndpoint0551178A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:99:24)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/CognitoAuthorizer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CognitoAuthorizerF3215DBC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new CognitoUserPoolsAuthorizer2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:114:32)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:109:5)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/OrganisationLambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OrganisationLambdaServiceRole407AAA2E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:63:36)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiDeployment180EC503949300d6687fb93ccbfe177476f02133"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:99:24)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/DeploymentStage.v1/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiDeploymentStagev1FE0EB7F7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:99:24)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/OrganisationLambda/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OrganisationLambdaServiceRoleDefaultPolicy1E4E5018"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...environmentFromArn.grantRead in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:78:24)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiOPTIONS6AA64D2D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:99:24)"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisations405490CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:120:49)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsOPTIONS248596F8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:120:49)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/GET/ApiPermission.OrganisationServiceStackRestApi8418BC31.GET..organisations": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsGETApiPermissionOrganisationServiceStackRestApi8418BC31GETorganisations32C39A5A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:122:27)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/GET/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.GET..organisations": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsGETApiPermissionTestOrganisationServiceStackRestApi8418BC31GETorganisationsA13BF981"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:122:27)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsGET2E4D0C81"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:122:27)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/POST/ApiPermission.OrganisationServiceStackRestApi8418BC31.POST..organisations": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsPOSTApiPermissionOrganisationServiceStackRestApi8418BC31POSTorganisations842B9574"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:126:27)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/POST/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.POST..organisations": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsPOSTApiPermissionTestOrganisationServiceStackRestApi8418BC31POSTorganisations4ECE8DB7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:126:27)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsPOST5C9F9EE7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:126:27)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdD1A87150"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:131:48)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdOPTIONSA519B1BA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:131:48)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/GET/ApiPermission.OrganisationServiceStackRestApi8418BC31.GET..organisations.{orgId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdGETApiPermissionOrganisationServiceStackRestApi8418BC31GETorganisationsorgId7FBEE6A7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:132:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/GET/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.GET..organisations.{orgId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdGETApiPermissionTestOrganisationServiceStackRestApi8418BC31GETorganisationsorgId48C1B56C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:132:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdGETFA9E7F34"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:132:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/PUT/ApiPermission.OrganisationServiceStackRestApi8418BC31.PUT..organisations.{orgId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdPUTApiPermissionOrganisationServiceStackRestApi8418BC31PUTorganisationsorgId1C14AF0C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:136:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/PUT/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.PUT..organisations.{orgId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdPUTApiPermissionTestOrganisationServiceStackRestApi8418BC31PUTorganisationsorgId9B694F99"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:136:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdPUT6635B5CE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:136:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/DELETE/ApiPermission.OrganisationServiceStackRestApi8418BC31.DELETE..organisations.{orgId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdDELETEApiPermissionOrganisationServiceStackRestApi8418BC31DELETEorganisationsorgId93735287"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:140:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/DELETE/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.DELETE..organisations.{orgId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdDELETEApiPermissionTestOrganisationServiceStackRestApi8418BC31DELETEorganisationsorgId581C40DD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:140:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/DELETE/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdDELETE6601814D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:140:26)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersB28208CE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:145:42)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersOPTIONSB08C68FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:145:42)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/GET/ApiPermission.OrganisationServiceStackRestApi8418BC31.GET..organisations.{orgId}.members": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersGETApiPermissionOrganisationServiceStackRestApi8418BC31GETorganisationsorgIdmembersDD47EB86"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:146:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/GET/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.GET..organisations.{orgId}.members": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersGETApiPermissionTestOrganisationServiceStackRestApi8418BC31GETorganisationsorgIdmembersE88C2E50"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:146:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersGET22D6A659"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:146:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/POST/ApiPermission.OrganisationServiceStackRestApi8418BC31.POST..organisations.{orgId}.members": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersPOSTApiPermissionOrganisationServiceStackRestApi8418BC31POSTorganisationsorgIdmembers17A4BE3D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:150:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/POST/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.POST..organisations.{orgId}.members": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersPOSTApiPermissionTestOrganisationServiceStackRestApi8418BC31POSTorganisationsorgIdmembersA1FB89E5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:150:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersPOST6A5800A0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:150:21)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersmemberId32565ED5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:154:36)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersmemberIdOPTIONS33E721DD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:154:36)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)"
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/PUT/ApiPermission.OrganisationServiceStackRestApi8418BC31.PUT..organisations.{orgId}.members.{memberId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersmemberIdPUTApiPermissionOrganisationServiceStackRestApi8418BC31PUTorganisationsorgIdmembersmemberId56D4CF5D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:155:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/PUT/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.PUT..organisations.{orgId}.members.{memberId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersmemberIdPUTApiPermissionTestOrganisationServiceStackRestApi8418BC31PUTorganisationsorgIdmembersmemberId9D11F78C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:155:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersmemberIdPUT6EE63A02"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:155:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/DELETE/ApiPermission.OrganisationServiceStackRestApi8418BC31.DELETE..organisations.{orgId}.members.{memberId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersmemberIdDELETEApiPermissionOrganisationServiceStackRestApi8418BC31DELETEorganisationsorgIdmembersmemberId80A72B1C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:159:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/DELETE/ApiPermission.Test.OrganisationServiceStackRestApi8418BC31.DELETE..organisations.{orgId}.members.{memberId}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersmemberIdDELETEApiPermissionTestOrganisationServiceStackRestApi8418BC31DELETEorganisationsorgIdmembersmemberIdCFC73077"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:159:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/OrganisationServiceStack/RestApi/Default/organisations/{orgId}/members/{memberId}/DELETE/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiorganisationsorgIdmembersmemberIdDELETE86C68F8E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:159:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

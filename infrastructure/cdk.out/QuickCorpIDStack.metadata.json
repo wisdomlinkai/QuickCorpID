@@ -1,0 +1,675 @@
+{
+  "/QuickCorpIDStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:stack-tags",
+      "data": [
+        {
+          "key": "Environment",
+          "value": "development"
+        },
+        {
+          "key": "ManagedBy",
+          "value": "CDK"
+        },
+        {
+          "key": "Project",
+          "value": "QuickCorpID"
+        }
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/Custom::VpcRestrictDefaultSGCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/QuickCorpIDStack/VpcId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:223:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/DocumentsBucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DocumentsBucketName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:227:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/DatabaseEndpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DatabaseEndpoint"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:231:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/UserPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:235:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/UserPoolClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClientId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:239:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/EncryptionKeyId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EncryptionKeyId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:243:9)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/EncryptionKey/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EncryptionKey1B843E66"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Key2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:52:30)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCB9E5F0B4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:60:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCIGWB7E252D3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:60:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCVPCGW99B986DC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:60:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:60:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:60:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/DocumentsBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DocumentsBucket9EC9DEB9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:88:32)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/UploadsBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UploadsBucket5E5E9B64"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:110:30)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/DatabaseSecret/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DatabaseSecret86DBB7B3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Secret2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:128:31)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/DatabaseParameterGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DatabaseParameterGroupC9757D64"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseCluster2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:149:25)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/Database/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DatabaseB269D8BB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseCluster2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:149:25)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/UserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPool6BA7E5F2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPool2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:176:25)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/UserPoolClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClient2F5918F7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPoolClient2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:199:31)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:109:5)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PublicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPublicSubnet1SubnetB4246D30"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PublicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPublicSubnet1RouteTableFEE4B781"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PublicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPublicSubnet1RouteTableAssociation0B0896DC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PublicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPublicSubnet1DefaultRoute91CEF279"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:208 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:60:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PublicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPublicSubnet2Subnet74179F39"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PublicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPublicSubnet2RouteTable6F1A15F1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PublicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPublicSubnet2RouteTableAssociation5A808732"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:268 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PublicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPublicSubnet2DefaultRouteB7481BBA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:208 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:60:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PrivateSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPrivateSubnet1Subnet8BCA10E0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PrivateSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPrivateSubnet1RouteTableBE8A6027"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PrivateSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPrivateSubnet1RouteTableAssociation347902D1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PrivateSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPrivateSubnet2SubnetCFCDAA7A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PrivateSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPrivateSubnet2RouteTable0A19E10E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/PrivateSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCPrivateSubnet2RouteTableAssociation0C73D413"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\QuickCorpID\\infrastructure\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:272 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/RestrictDefaultSecurityGroupCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCRestrictDefaultSecurityGroupCustomResource59474679"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:60:20)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/S3Endpoint/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCS3Endpoint18C9C7CA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addGatewayEndpoint in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:78:18)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/SecretsManagerEndpoint/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCSecretsManagerEndpoint5B9B8B35"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:81:18)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/DatabaseSecret/Attachment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DatabaseSecretAttachment9A63A3D4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseCluster2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:149:25)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/Database/Subnets/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DatabaseSubnets56F17B9A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseCluster2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:149:25)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/Database/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DatabaseSecurityGroup5C91FDCB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseCluster2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:149:25)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/Database/Writer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DatabaseWriter7794273E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new DatabaseCluster2 in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:149:25)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/QuickCorpIDStack/VPC/SecretsManagerEndpoint/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCSecretsManagerEndpointSecurityGroup1955BBE9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addInterfaceEndpoint in aws-cdk-lib...",
+        "new QuickCorpIDStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\quickcorpid-stack.js:81:18)",
+        "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:49:1)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

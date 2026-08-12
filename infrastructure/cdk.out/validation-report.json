@@ -1,0 +1,77 @@
+{
+  "version": "54.0.0",
+  "title": "Validation Report",
+  "pluginReports": [
+    {
+      "pluginName": "CloudFormation Validate",
+      "pluginVersion": "1.6.0",
+      "conclusion": "success",
+      "violations": [
+        {
+          "ruleName": "W2531",
+          "description": "Runtime: Runtime 'nodejs20.x' was deprecated on '2026-04-30'. Creation was disabled on '2027-02-01' and update on '2027-03-03'. Please consider updating to 'nodejs24.x'",
+          "severity": "warning",
+          "ruleMetadata": {
+            "category": "Deprecation"
+          },
+          "violatingConstructs": [
+            {
+              "constructPath": "AuthServiceStack/AuthLambda/Resource",
+              "constructFqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+              "libraryVersion": "2.263.0",
+              "cloudFormationResource": {
+                "templatePath": "AuthServiceStack.template.json",
+                "logicalId": "AuthLambda6BB8C88C",
+                "propertyPaths": [
+                  "Properties.Runtime"
+                ]
+              },
+              "stackTraces": [
+                "...new Function2 in aws-cdk-lib...",
+                "new AuthServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\auth-service-stack.js:88:31)",
+                "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:76:26)",
+                "...node internals..."
+              ]
+            },
+            {
+              "constructPath": "DatabaseSchemaStack/SchemaInitializer/Resource",
+              "constructFqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+              "libraryVersion": "2.263.0",
+              "cloudFormationResource": {
+                "templatePath": "DatabaseSchemaStack.template.json",
+                "logicalId": "SchemaInitializerD16A50D4",
+                "propertyPaths": [
+                  "Properties.Runtime"
+                ]
+              },
+              "stackTraces": [
+                "...new Function2 in aws-cdk-lib...",
+                "new DatabaseSchemaStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\database-schema-stack.js:59:35)",
+                "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:60:29)",
+                "...node internals..."
+              ]
+            },
+            {
+              "constructPath": "OrganisationServiceStack/OrganisationLambda/Resource",
+              "constructFqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+              "libraryVersion": "2.263.0",
+              "cloudFormationResource": {
+                "templatePath": "OrganisationServiceStack.template.json",
+                "logicalId": "OrganisationLambda54563F3C",
+                "propertyPaths": [
+                  "Properties.Runtime"
+                ]
+              },
+              "stackTraces": [
+                "...new Function2 in aws-cdk-lib...",
+                "new OrganisationServiceStack (C:\\QuickCorpID\\infrastructure\\dist\\lib\\organisation-service-stack.js:63:36)",
+                "<anonymous> (C:\\QuickCorpID\\infrastructure\\dist\\bin\\quickcorpid.js:93:34)",
+                "...node internals..."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
