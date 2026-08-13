@@ -12,6 +12,7 @@ import DashboardPage from './pages/DashboardPage';
 import NewDashboardPage from './pages/NewDashboardPage';
 import CorpIDPage from './pages/CorpIDPage';
 import DocumentsPage from './pages/DocumentsPage';
+import SettingsPage from './pages/SettingsPage';
 import OrganisationPage from './pages/OrganisationPage';
 import PricingPage from './pages/PricingPage';
 import AboutPage from './pages/AboutPage';
@@ -79,6 +80,14 @@ function App() {
                     element={
                       <ProtectedRoute>
                         <DocumentsPage />
+                      </ProtectedRoute>
+                    } 
+                  />
+                  <Route 
+                    path="/settings" 
+                    element={
+                      <ProtectedRoute>
+                        <SettingsPage />
                       </ProtectedRoute>
                     } 
                   />
