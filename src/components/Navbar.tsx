@@ -2,21 +2,31 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useBranding } from '../config/branding.tsx';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
   const { t } = useLanguage();
+  const { branding } = useBranding();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
+  // Build nav items based on branding feature flags
   const navItems = [
-    { path: '/', label: t.nav.home },
-    { path: '/register', label: t.nav.register },
-    { path: '/dashboard', label: t.nav.dashboard },
-    { path: '/pricing', label: t.nav.pricing },
-    { path: '/about', label: t.nav.about },
-  ];
+    { path: '/', label: t.nav.home, show: true },
+    { path: '/register', label: t.nav.register, show: true },
+    { path: '/dashboard', label: t.nav.dashboard, show: true },
+    { path: '/pricing', label: t.nav.pricing, show: branding?.features?.showPricingPage ?? true },
+    { path: '/about', label: t.nav.about, show: branding?.features?.showAboutPage ?? true },
+  ].filter(item => item.show);
+
+  const isActive = (path: string) => location.pathname === path;
+  const primaryColor = branding?.colors?.primary || '#2563eb';
+  const linkStyle = (path: string) => ({
+    className: `text-sm font-medium transition-colors ${isActive(path) ? '' : 'text-slate-600'}`,
+    style: isActive(path) ? { color: branding.colors.primary } : {},
+  });
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
@@ -26,7 +36,12 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-8">
             <div className="flex items-center gap-6">
               {navItems.map((item) => (
-                <Link key={item.path} to={item.path} className={`text-sm font-medium transition-colors ${location.pathname === item.path ? 'text-blue-600' : 'text-slate-600 hover:text-blue-600'}`}>
+                <Link 
+                  key={item.path} 
+                  to={item.path} 
+                  className={`text-sm font-medium transition-colors ${isActive(item.path) ? '' : 'text-slate-600 hover:opacity-80'}`}
+                  style={isActive(item.path) ? { color: primaryColor } : {}}
+                >
                   {item.label}
                 </Link>
               ))}
@@ -44,7 +59,13 @@ const Navbar = () => {
           <div className="md:hidden py-4 border-t border-slate-200">
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
-                <Link key={item.path} to={item.path} onClick={() => setIsOpen(false)} className={`px-4 py-3 rounded-lg text-sm font-medium ${location.pathname === item.path ? 'bg-blue-50 text-blue-600' : 'text-slate-600 hover:bg-slate-50'}`}>
+                <Link 
+                  key={item.path} 
+                  to={item.path} 
+                  onClick={() => setIsOpen(false)} 
+                  className={`px-4 py-3 rounded-lg text-sm font-medium ${isActive(item.path) ? '' : 'text-slate-600 hover:bg-slate-50'}`}
+                  style={isActive(item.path) ? { backgroundColor: `${primaryColor}15`, color: primaryColor } : {}}
+                >
                   {item.label}
                 </Link>
               ))}

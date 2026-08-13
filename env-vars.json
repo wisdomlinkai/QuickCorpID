@@ -1,0 +1,13 @@
+{
+    "Variables":  {
+                      "KEK_SECRET_ARN":  "arn:aws:secretsmanager:ap-southeast-1:240966654973:secret:QuickCorpID/CorpID/KEK-UkFpP1",
+                      "DATABASE_SECRET_ARN":  "arn:aws:secretsmanager:ap-southeast-1:240966654973:secret:DatabaseSecret86DBB7B3-DiVgdXkHj1O2-r2Oz9D",
+                      "CORPID_SANDBOX_URL":  "https://sandbox.corpid.gov.hk/api/v1",
+                      "USER_POOL_ID":  "ap-southeast-1_JLjSrO6V8",
+                      "DATABASE_ENDPOINT":  "quickcorpid-databaseb269d8bb-8oydiecqaoh8.cluster-chg6i2wyozug.ap-southeast-1.rds.amazonaws.com:5432",
+                      "CORPID_REDIRECT_URI":  "https://app.quickcorpid.com/callback/corpid",
+                      "DATABASE_NAME":  "quickcorpid",
+                      "CORPID_PRODUCTION_URL":  "https://api.corpid.gov.hk/v1",
+                      "KMS_KEY_ID":  "da1e3b12-9ad6-4b6e-8ed6-8071b6f6f958"
+                  }
+}

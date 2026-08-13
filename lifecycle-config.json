@@ -1,0 +1,14 @@
+{
+    "Rules":  [
+                  {
+                      "Filter":  {
+                                     "Prefix":  ""
+                                 },
+                      "Status":  "Enabled",
+                      "NoncurrentVersionExpiration":  {
+                                                          "NoncurrentDays":  90
+                                                      },
+                      "ID":  "DeleteOldVersions"
+                  }
+              ]
+}

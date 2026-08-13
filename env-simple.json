@@ -1,0 +1,3 @@
+{
+    "DATABASE_URL":  "postgresql://postgres:QuickCorpID2026!@quickcorpid-databaseb269d8bb-8oydiecqaoh8.cluster-chg6i2wyozug.ap-southeast-1.rds.amazonaws.com:5432/quickcorpid"
+}

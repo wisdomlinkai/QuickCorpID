@@ -1,5 +1,6 @@
 /**
  * Co-Branding Configuration
+ * @version 2.0.0
  * 
  * This module provides white-label branding support for the QuickCorpID application.
  * Partners can customize logo, colors, company name, contact information, and footer text.
@@ -93,22 +94,23 @@ export const defaultBranding: BrandingConfig = {
   },
 };
 
-// ============ Tai HK Partner Branding (Example) ============
+// ============ Tai HK Partner Branding ============
 
 export const taiHKBranding: BrandingConfig = {
-  companyName: 'Tai HK CorpID Portal',
-  companyNameZh: '泰港 CorpID 門戶',
-  tagline: 'Your trusted CorpID partner',
-  taglineZh: '您信賴的 CorpID 合作夥伴',
+  companyName: 'Tai HK Corporate Services',
+  companyNameZh: '大香港企業服務',
+  tagline: '用心幫你 助你起飛',
+  taglineZh: '用心幫你 助你起飛',
   
+  // Colors based on Tai HK website - professional navy/teal tones
   colors: {
-    primary: '#7c3aed', // violet-600
-    primaryHover: '#6d28d9', // violet-700
-    secondary: '#ec4899', // pink-500
-    accent: '#db2777', // pink-600
+    primary: '#334155',       // slate-700 - Deep navy for professionalism
+    primaryHover: '#1e293b', // slate-800
+    secondary: '#0d9488',    // teal-600 - Teal accent from their brand
+    accent: '#f59e0b',       // amber-500 - Gold for premium feel
     gradient: {
-      from: '#7c3aed', // violet-600
-      to: '#ec4899', // pink-500
+      from: '#334155',       // slate-700
+      to: '#0d9488',         // teal-600
     },
   },
   
@@ -117,19 +119,19 @@ export const taiHKBranding: BrandingConfig = {
   },
   
   contact: {
-    email: 'support@taihk.hk',
-    phone: '+852 9876 5432',
-    website: 'https://taihk.hk',
+    email: 'info@taihk.com.hk',
+    phone: '+852 3611 5771',
+    website: 'https://www.taihk.com.hk',
   },
   
   footer: {
-    copyright: '© 2024 Tai HK Limited',
-    termsUrl: 'https://taihk.hk/terms',
-    privacyUrl: 'https://taihk.hk/privacy',
+    copyright: '© 2024 大香港企業服務 Tai HK Corporate Services',
+    termsUrl: 'https://www.taihk.com.hk/terms',
+    privacyUrl: 'https://www.taihk.com.hk/privacy',
   },
   
   features: {
-    showPricingPage: true,
+    showPricingPage: false, // Tai HK has their own pricing
     showAboutPage: true,
   },
 };
@@ -148,8 +150,22 @@ interface BrandingProviderProps {
   initialBranding?: BrandingConfig;
 }
 
-export const BrandingProvider = ({ children, initialBranding = defaultBranding }: BrandingProviderProps) => {
-  const [branding, setBranding] = useState<BrandingConfig>(initialBranding);
+export const BrandingProvider = ({ children, initialBranding }: BrandingProviderProps) => {
+  // Check URL for brand parameter
+  const getInitialBranding = (): BrandingConfig => {
+    if (typeof window === 'undefined') return initialBranding || defaultBranding;
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const brandParam = urlParams.get('brand');
+    
+    if (brandParam === 'tai-hk') {
+      return taiHKBranding;
+    }
+    
+    return initialBranding || defaultBranding;
+  };
+  
+  const [branding, setBranding] = useState<BrandingConfig>(getInitialBranding);
   
   return (
     <BrandingContext.Provider value={{ branding, setBranding }}>
@@ -161,7 +177,11 @@ export const BrandingProvider = ({ children, initialBranding = defaultBranding }
 export const useBranding = (): BrandingContextType => {
   const context = useContext(BrandingContext);
   if (!context) {
-    throw new Error('useBranding must be used within a BrandingProvider');
+    // Return default branding instead of throwing
+    return {
+      branding: defaultBranding,
+      setBranding: () => {},
+    };
   }
   return context;
 };

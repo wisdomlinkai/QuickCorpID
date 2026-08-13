@@ -1,0 +1,25 @@
+{
+    "CORSRules":  [
+                      {
+                          "MaxAgeSeconds":  3000,
+                          "AllowedHeaders":  [
+                                                 "*"
+                                             ],
+                          "AllowedOrigins":  [
+                                                 "https://app.quickcorpid.com",
+                                                 "http://localhost:3000"
+                                             ],
+                          "ExposeHeaders":  [
+                                                "ETag",
+                                                "x-amz-server-side-encryption"
+                                            ],
+                          "AllowedMethods":  [
+                                                 "GET",
+                                                 "PUT",
+                                                 "POST",
+                                                 "DELETE",
+                                                 "HEAD"
+                                             ]
+                      }
+                  ]
+}

@@ -1,0 +1,15 @@
+{
+    "path":  "/corpid/connection",
+    "requestContext":  {
+                           "authorizer":  {
+                                              "claims":  {
+                                                             "email":  "test@example.com",
+                                                             "sub":  "test-user-id"
+                                                         }
+                                          }
+                       },
+    "headers":  {
+                    "Authorization":  "Bearer test-token"
+                },
+    "httpMethod":  "GET"
+}

@@ -352,28 +352,122 @@ src/
 
 ---
 
-## CorpID Sandbox Integration Notes
+## CorpID Integration Specification
 
-### Registration URL
-- Sandbox: https://sb.corpid.gov.hk/
+### Overview
 
-### Key Integration Points
-1. **Business Registration Verification**
-   - Verify BR number with Inland Revenue Department
-   - Retrieve company information automatically
+CorpID is Hong Kong's Digital Corporate Identity Platform, launching end of 2026. It provides:
+- Digital corporate identity authentication
+- Digital signing with legal recognition
+- Form pre-filling with verified company data
+- Storage of digital licences and permits
 
-2. **Identity Verification**
-   - HKID verification with Immigration Department
-   - Support for passport verification
+### Resources
 
-3. **Application Submission**
-   - Submit CorpID application
-   - Receive reference number
-   - Track application status
+| Resource | URL |
+|----------|-----|
+| Sandbox Portal | https://sb.corpid.gov.hk/ |
+| Documentation | https://www.digitalpolicy.gov.hk/en/our_work/success_stories/corpid_sandbox/ |
+| iAM Smart Integration | https://www.digitalpolicy.gov.hk/en/our_work/data_governance/common_data_platforms/iam_smart/ |
 
-4. **Callback Handling**
-   - Handle approval/rejection callbacks
-   - Update application status in real-time
+### Minimum Required Fields for CorpID
+
+Based on CorpID documentation, only **7 fields** are strictly required:
+
+| Category | Field | Required | Notes |
+|----------|-------|----------|-------|
+| Business | BR Number | ✅ | 8-digit Business Registration Number |
+| Business | Business Type | ✅ | Limited Company, Sole Proprietorship, Partnership, Branch |
+| Identity | ID Type | ✅ | HKID or Passport |
+| Identity | ID Number | ✅ | HKID: A123456(7) format |
+| Applicant | Role | ✅ | Director, Owner, Partner, Authorized Rep |
+| Applicant | Email | ✅ | For CorpID notifications |
+| Declaration | Authorization | ✅ | Legal authorization to act for company |
+
+### Optional but Recommended
+
+| Field | When Required |
+|-------|---------------|
+| Company Name | Auto-fills from BR verification |
+| Phone | Recommended for urgent communications |
+| ID Document | Required for passport holders without iAM Smart |
+| iAM Smart Verification | Recommended for HKID holders |
+
+### NOT Required
+
+The following are **NOT required** for CorpID and should not be collected:
+- Company Address (auto-retrieved from BR)
+- Incorporation Date (auto-retrieved from BR)
+- Company Secretary details
+- Shareholder details
+- Business description
+
+### Integration Architecture
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   QuickCorpID   │────▶│   CorpID API    │────▶│   Government    │
+│   Frontend      │     │   Sandbox       │     │   Databases     │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+         │                       │
+         │                       │
+         ▼                       ▼
+┌─────────────────┐     ┌─────────────────┐
+│   AWS Backend   │     │   iAM Smart     │
+│   (Cognito/S3)  │     │   (Optional)    │
+└─────────────────┘     └─────────────────┘
+```
+
+### API Endpoints (Sandbox)
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/api/v1/business/verify` | POST | Verify BR number with IRD |
+| `/api/v1/applications` | POST | Submit CorpID application |
+| `/api/v1/applications/{ref}` | GET | Check application status |
+| `/api/v1/documents/upload` | POST | Upload identity documents |
+| `/oauth/authorize` | GET | OAuth authorization |
+| `/oauth/token` | POST | Exchange code for token |
+
+### Authentication Flow
+
+CorpID uses OAuth 2.0:
+
+1. User initiates registration on QuickCorpID
+2. Redirect to CorpID OAuth authorization
+3. User authenticates (with iAM Smart optional)
+4. Redirect back with authorization code
+5. Exchange code for access token
+6. Use token to submit application
+
+### iAM Smart Integration
+
+For users with Hong Kong ID Cards, iAM Smart provides:
+- Instant identity verification
+- No document upload needed
+- Legally recognized digital signature
+
+**Implementation:**
+```typescript
+// Redirect to iAM Smart
+const iAMSmartUrl = getIAMSmartAuthUrl(redirectUri);
+window.location.href = iAMSmartUrl;
+
+// Handle callback
+const result = await handleIAMSmartCallback(authCode);
+```
+
+### Test Data
+
+**Sandbox BR Numbers:**
+- `12345678` → Valid, "Sample Trading Limited"
+- `87654321` → Valid, "測試貿易有限公司"
+- `11111111` → Invalid, not found
+
+**HKID Validation:**
+- Format: `[A-Z]{1,2}\d{6}(\d)`
+- Example: `A123456(7)`
+- Uses checksum validation algorithm
 
 ---
 

@@ -1,163 +1,377 @@
 /**
- * CorpID Sandbox API Mock Service
+ * CorpID Sandbox API Integration Service
  * 
- * This module provides mock implementations of CorpID Sandbox API endpoints.
- * Replace these with actual API calls when integrating with the real CorpID Sandbox.
+ * This module provides integration with the Hong Kong CorpID Platform.
+ * CorpID enables companies to authenticate their identity digitally, 
+ * authorise representatives, and access services through a unified interface.
  * 
- * @module services/corpidApi
+ * Sandbox URL: https://sb.corpid.gov.hk/
+ * Production URL: https://corpid.gov.hk/ (launching end of 2026)
  * 
- * @example
- * // Submit an application
- * import { submitApplication } from './services/corpidApi';
+ * Key Features:
+ * - Digital corporate identity authentication
+ * - Digital signing (legally recognized)
+ * - Form pre-filling
+ * - Storage of digital licences and permits
  * 
- * const result = await submitApplication({
- *   business: { brNumber: '12345678', companyNameEn: 'Acme Ltd', businessType: 'Limited Company' },
- *   identity: { idType: 'hkid', idNumber: 'A123456(7)' },
- *   applicant: { role: 'owner', email: 'user@example.com' },
- *   agreeTerms: true,
- *   authDeclaration: true
- * });
- * 
- * @see https://sb.corpid.gov.hk/ for CorpID Sandbox registration
- * 
- * API Endpoints (production):
- * - Sandbox: https://sb.corpid.gov.hk/api/
- * - Production: https://api.corpid.gov.hk/
+ * Integration Points:
+ * - Business Registration Verification (with IRD)
+ * - Company Registry Integration
+ * - iAM Smart identity verification
  */
 
-// ============ Type Definitions ============
+// ============================================================================
+// Types & Interfaces
+// ============================================================================
 
-export type ApplicationStatus = 'pending' | 'processing' | 'approved' | 'rejected';
+/**
+ * Business types recognized by CorpID
+ */
+export type BusinessType = 
+  | 'limited_company'      // Limited Company (私人有限公司)
+  | 'sole_proprietorship'  // Sole Proprietorship (獨資)
+  | 'partnership'          // Partnership (合夥)
+  | 'branch_company'       // Branch of Foreign Company (海外公司分公司)
+  | 'other';
 
-export interface BusinessDetails {
-  brNumber: string;
-  companyNameEn?: string;
-  companyNameZh?: string;
-  businessType: string;
-}
+/**
+ * Identity document types
+ */
+export type IdentityType = 
+  | 'hkid'      // Hong Kong ID Card
+  | 'passport'; // Foreign Passport
 
-export interface IdentityDetails {
-  idType: 'hkid' | 'passport';
-  idNumber: string;
-  documentFile?: File | null;
-}
+/**
+ * Applicant role in the company
+ */
+export type ApplicantRole = 
+  | 'director'   // Company Director
+  | 'owner'      // Business Owner (for sole proprietorship)
+  | 'partner'    // Partner (for partnership)
+  | 'authorized_representative'; // Authorized Representative
 
-export interface ApplicantDetails {
-  role: 'owner' | 'employee' | 'agent';
-  email?: string;
-  phone?: string;
-}
+/**
+ * Application status in CorpID system
+ */
+export type CorpIDApplicationStatus = 
+  | 'draft'
+  | 'submitted'
+  | 'verifying'
+  | 'pending_documents'
+  | 'pending_verification'
+  | 'approved'
+  | 'rejected';
 
+/**
+ * CorpID Application data structure
+ * Maps to what CorpID requires for corporate identity registration
+ */
 export interface CorpIDApplication {
-  business: BusinessDetails;
-  identity: IdentityDetails;
-  applicant: ApplicantDetails;
-  agreeTerms: boolean;
-  authDeclaration: boolean;
+  // Business Information (from Business Registration Certificate)
+  business: {
+    brNumber: string;           // 8-digit Business Registration Number
+    companyNameEn?: string;     // Company name in English
+    companyNameZh?: string;     // Company name in Chinese
+    businessType: BusinessType;
+    incorporationDate?: string; // Date of incorporation/registration
+    registeredAddress?: string; // Registered office address
+  };
+  
+  // Identity Verification (for the applicant)
+  identity: {
+    idType: IdentityType;
+    idNumber: string;           // HKID: A123456(7) format, or passport number
+    idDocumentUrl?: string;     // Uploaded document URL
+    iAMSmartVerified?: boolean; // Whether verified via iAM Smart
+  };
+  
+  // Applicant Information
+  applicant: {
+    role: ApplicantRole;
+    fullName?: string;
+    email: string;
+    phone?: string;
+    authorizationDocument?: string; // For authorized representatives
+  };
+  
+  // Terms & Declarations
+  declarations: {
+    agreeTerms: boolean;
+    authDeclaration: boolean;   // Authorized to act on behalf of company
+    dataConsent: boolean;       // Consent for data processing
+  };
 }
 
-export interface SubmitResult {
+/**
+ * CorpID verification result
+ */
+export interface CorpIDVerificationResult {
+  valid: boolean;
+  companyName?: string;
+  companyType?: BusinessType;
+  incorporationDate?: string;
+  status?: 'active' | 'deregistered' | 'inactive';
+  error?: string;
+}
+
+/**
+ * CorpID application submission result
+ */
+export interface CorpIDSubmissionResult {
   success: boolean;
   refNumber?: string;
-  message: string;
-  estimatedProcessingDays?: number;
+  status?: CorpIDApplicationStatus;
+  message?: string;
   errors?: Array<{
     field: string;
     message: string;
   }>;
 }
 
-export interface StatusResult {
+/**
+ * CorpID status check result
+ */
+export interface CorpIDStatusResult {
   refNumber: string;
-  status: ApplicationStatus;
+  status: CorpIDApplicationStatus;
+  statusMessage: string;
   lastUpdated: string;
-  statusHistory: Array<{
-    status: ApplicationStatus;
-    timestamp: string;
-    description: string;
-  }>;
+  estimatedCompletion?: string;
   nextSteps?: string[];
-  corpId?: string; // Only available when approved
 }
 
-export interface VerificationResult {
-  valid: boolean;
-  companyName?: string;
-  companyNameZh?: string;
-  businessType?: string;
-  registrationDate?: string;
-  expiryDate?: string;
-  message: string;
-}
+// ============================================================================
+// Configuration
+// ============================================================================
 
-export interface ApiError {
-  code: string;
-  message: string;
-  details?: Record<string, unknown>;
-}
-
-// ============ Mock API Configuration ============
-
-const MOCK_DELAY_MIN = 800;
-const MOCK_DELAY_MAX = 2000;
-
-// Simulate network delay
-const simulateDelay = (): Promise<void> => {
-  const delay = Math.random() * (MOCK_DELAY_MAX - MOCK_DELAY_MIN) + MOCK_DELAY_MIN;
-  return new Promise(resolve => setTimeout(resolve, delay));
+const CORPID_CONFIG = {
+  // Sandbox environment (use for development)
+  sandbox: {
+    baseUrl: 'https://sb.corpid.gov.hk/api/v1',
+    oauthUrl: 'https://sb.corpid.gov.hk/oauth',
+    timeout: 30000,
+  },
+  // Production environment (launching end of 2026)
+  production: {
+    baseUrl: 'https://corpid.gov.hk/api/v1',
+    oauthUrl: 'https://corpid.gov.hk/oauth',
+    timeout: 30000,
+  },
 };
 
-// Simulate occasional network failures (5% chance)
-const simulateNetworkError = (): boolean => {
-  return Math.random() < 0.05;
-};
+// Determine which environment to use
+const isProduction = typeof import.meta !== 'undefined' ? import.meta.env.PROD : false;
+const config = isProduction ? CORPID_CONFIG.production : CORPID_CONFIG.sandbox;
 
-// ============ Mock API Functions ============
+// ============================================================================
+// API Client (Placeholder Implementation)
+// ============================================================================
 
 /**
- * Submit a new CorpID application
+ * CorpID API Client
  * 
- * @param application - The application data
- * @returns Promise resolving to submit result
+ * Note: The actual CorpID Sandbox API endpoints will be available
+ * when you register at https://sb.corpid.gov.hk/
+ * 
+ * This implementation provides mock responses for development.
+ * Replace mock implementations with real API calls when credentials are available.
+ */
+class CorpIDAPIClient {
+  private baseUrl: string;
+  private timeout: number;
+  private apiKey: string | null = null;
+
+  constructor() {
+    this.baseUrl = config.baseUrl;
+    this.timeout = config.timeout;
+  }
+
+  /**
+   * Set API key for authenticated requests
+   */
+  setApiKey(key: string) {
+    this.apiKey = key;
+  }
+
+  /**
+   * Make an API request (placeholder for future implementation)
+   */
+  private async request<T>(
+    endpoint: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _options: RequestInit = {}
+  ): Promise<{ data: T | null; error: Error | null }> {
+    try {
+      // For now, return mock responses
+      // In production, this would make actual HTTP requests to endpoint
+      console.log(`API call to: ${endpoint}`);
+      throw new Error('API not configured - using mock mode');
+    } catch (error) {
+      return { data: null, error: error as Error };
+    }
+  }
+}
+
+// ============================================================================
+// Mock Implementations (for development)
+// ============================================================================
+
+/**
+ * Simulate network delay
+ */
+const simulateDelay = (ms: number = 1000) => 
+  new Promise(resolve => setTimeout(resolve, ms));
+
+/**
+ * Sample verified BR numbers for testing
+ */
+const SAMPLE_BR_DATA: Record<string, CorpIDVerificationResult> = {
+  '12345678': {
+    valid: true,
+    companyName: 'Sample Trading Limited',
+    companyType: 'limited_company',
+    incorporationDate: '2020-01-15',
+    status: 'active',
+  },
+  '87654321': {
+    valid: true,
+    companyName: '測試貿易有限公司',
+    companyType: 'limited_company',
+    incorporationDate: '2019-06-20',
+    status: 'active',
+  },
+  '11111111': {
+    valid: false,
+    error: 'Business Registration Number not found',
+  },
+};
+
+/**
+ * Verify a Business Registration Number
+ * 
+ * In production, this calls the CorpID API which integrates with
+ * the Inland Revenue Department (IRD) to verify BR numbers.
+ * 
+ * @param brNumber - 8-digit Business Registration Number
+ * @returns Verification result with company details if valid
+ */
+export async function verifyBRNumber(
+  brNumber: string
+): Promise<CorpIDVerificationResult> {
+  await simulateDelay(800);
+
+  // Validate format
+  if (!/^\d{8}$/.test(brNumber)) {
+    return {
+      valid: false,
+      error: 'Invalid BR number format. Must be 8 digits.',
+    };
+  }
+
+  // Check sample data
+  if (SAMPLE_BR_DATA[brNumber]) {
+    return SAMPLE_BR_DATA[brNumber];
+  }
+
+  // For any other valid-format BR number, simulate a response
+  // In production, this would call the actual API
+  const isValid = parseInt(brNumber) % 3 !== 0; // Simulate some failures
+  
+  if (isValid) {
+    return {
+      valid: true,
+      companyName: `Company ${brNumber.slice(0, 4)}`,
+      companyType: 'limited_company',
+      status: 'active',
+    };
+  }
+
+  return {
+    valid: false,
+    error: 'Business Registration Number not found in registry',
+  };
+}
+
+/**
+ * Validate Hong Kong ID Card format and checksum
+ * 
+ * HKID format: A123456(7) - one or two letters, 6 digits, check digit in parentheses
+ * 
+ * @param hkid - HKID string
+ * @returns Whether the HKID is valid
+ */
+export function validateHKIDFormat(hkid: string): boolean {
+  // Clean and normalize
+  const cleaned = hkid.toUpperCase().replace(/\s/g, '');
+  
+  // Match format: 1-2 letters, 6 digits, 1 check digit in parentheses
+  const match = cleaned.match(/^([A-Z]{1,2})(\d{6})\((\d)\)$/);
+  
+  if (!match) return false;
+  
+  const [, letters, digits, checkDigit] = match;
+  
+  // Calculate checksum
+  // Reference: Hong Kong ID Card check digit algorithm
+  let sum = 0;
+  
+  // Weight for each position (from right to left, excluding check digit)
+  // For 2-letter HKID: weights are 9, 8 for letters, then 7,6,5,4,3,2 for digits
+  // For 1-letter HKID: treat first position as space (value 36), weight 9
+  
+  const chars = (letters.length === 1 ? ' ' + letters : letters) + digits;
+  
+  for (let i = 0; i < 8; i++) {
+    let value: number;
+    if (chars[i] === ' ') {
+      value = 36; // Space character value
+    } else if (chars[i] >= 'A' && chars[i] <= 'Z') {
+      value = chars[i].charCodeAt(0) - 55; // A=10, B=11, etc.
+    } else {
+      value = parseInt(chars[i]);
+    }
+    sum += value * (9 - i);
+  }
+  
+  // Calculate expected check digit
+  const remainder = sum % 11;
+  const expectedCheckDigit = remainder === 0 ? 0 : 11 - remainder;
+  
+  return expectedCheckDigit === parseInt(checkDigit);
+}
+
+/**
+ * Submit a CorpID application
+ * 
+ * @param application - Complete application data
+ * @returns Submission result with reference number
  */
 export async function submitApplication(
   application: CorpIDApplication
-): Promise<SubmitResult> {
-  await simulateDelay();
-
-  // Simulate network error
-  if (simulateNetworkError()) {
-    throw {
-      code: 'NETWORK_ERROR',
-      message: 'Unable to connect to CorpID service. Please try again.',
-    } as ApiError;
-  }
+): Promise<CorpIDSubmissionResult> {
+  await simulateDelay(1500);
 
   // Validate required fields
   const errors: Array<{ field: string; message: string }> = [];
-  
-  if (!application.business.brNumber || !/^\d{8}$/.test(application.business.brNumber)) {
-    errors.push({ field: 'brNumber', message: 'Invalid Business Registration Number' });
+
+  if (!application.business.brNumber) {
+    errors.push({ field: 'brNumber', message: 'Business Registration Number is required' });
   }
-  
-  if (!application.business.companyNameEn && !application.business.companyNameZh) {
-    errors.push({ field: 'companyName', message: 'Company name is required' });
-  }
-  
+
   if (!application.identity.idNumber) {
-    errors.push({ field: 'idNumber', message: 'ID number is required' });
+    errors.push({ field: 'idNumber', message: 'Identity document number is required' });
   }
-  
-  if (!application.applicant.role) {
-    errors.push({ field: 'role', message: 'Role is required' });
+
+  if (!application.applicant.email) {
+    errors.push({ field: 'email', message: 'Email address is required' });
   }
-  
-  if (!application.agreeTerms) {
-    errors.push({ field: 'agreeTerms', message: 'Must agree to terms' });
+
+  if (!application.declarations.agreeTerms) {
+    errors.push({ field: 'agreeTerms', message: 'You must agree to the terms and conditions' });
   }
-  
-  if (!application.authDeclaration) {
-    errors.push({ field: 'authDeclaration', message: 'Authorization declaration required' });
+
+  if (!application.declarations.authDeclaration) {
+    errors.push({ field: 'authDeclaration', message: 'Authorization declaration is required' });
   }
 
   if (errors.length > 0) {
@@ -170,221 +384,212 @@ export async function submitApplication(
 
   // Generate reference number
   const year = new Date().getFullYear();
-  const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();
-  const refNumber = `CORP-${year}-${randomPart}`;
+  const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+  const refNumber = `CORP-${year}-${random}`;
 
+  // Simulate success
   return {
     success: true,
     refNumber,
-    message: 'Application submitted successfully',
-    estimatedProcessingDays: 3,
+    status: 'submitted',
+    message: 'Application submitted successfully. You will receive a confirmation email shortly.',
   };
 }
 
 /**
- * Check the status of an existing application
+ * Check the status of a CorpID application
  * 
- * @param refNumber - The application reference number
- * @returns Promise resolving to status result
+ * @param refNumber - Application reference number
+ * @returns Current status and details
  */
-export async function checkStatus(refNumber: string): Promise<StatusResult> {
-  await simulateDelay();
-
-  // Simulate network error
-  if (simulateNetworkError()) {
-    throw {
-      code: 'NETWORK_ERROR',
-      message: 'Unable to connect to CorpID service. Please try again.',
-    } as ApiError;
-  }
+export async function checkApplicationStatus(
+  refNumber: string
+): Promise<CorpIDStatusResult> {
+  await simulateDelay(500);
 
   // Validate reference number format
-  if (!/^CORP-\d{4}-[A-Z0-9]{6}$/.test(refNumber)) {
-    throw {
-      code: 'INVALID_REF',
-      message: 'Invalid reference number format',
-    } as ApiError;
+  if (!refNumber.match(/^CORP-\d{4}-[A-Z0-9]{6}$/)) {
+    throw new Error('Invalid reference number format');
   }
 
-  // Simulate different statuses based on reference number
-  // In real implementation, this would fetch from the API
-  const now = new Date().toISOString();
-  const submittedDate = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(); // 2 days ago
-  
-  // Use last character to determine status for demo purposes
-  const lastChar = refNumber.slice(-1);
-  let status: ApplicationStatus;
-  let nextSteps: string[] | undefined;
-  let corpId: string | undefined;
+  // Simulate status progression
+  // In production, this would fetch actual status from CorpID
+  const hour = new Date().getHours();
+  let status: CorpIDApplicationStatus;
+  let statusMessage: string;
+  let nextSteps: string[];
 
-  if (/[0-4]/.test(lastChar)) {
-    status = 'approved';
-    corpId = `HK${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+  if (hour < 10) {
+    status = 'submitted';
+    statusMessage = 'Your application has been submitted and is being processed.';
     nextSteps = [
-      'Your CorpID is now active',
-      'You can use it for government services',
-      'Set up digital signing capabilities',
+      'Wait for initial review (usually within 1-2 business days)',
+      'Check your email for any additional document requests',
     ];
-  } else if (/[5-7]/.test(lastChar)) {
-    status = 'processing';
+  } else if (hour < 14) {
+    status = 'verifying';
+    statusMessage = 'Your application is being verified with the relevant authorities.';
     nextSteps = [
-      'Application is under review',
-      'Expected completion in 1-2 business days',
+      'Verification in progress',
+      'You may be contacted for additional information',
     ];
   } else {
-    status = 'pending';
+    status = 'approved';
+    statusMessage = 'Congratulations! Your CorpID has been approved.';
     nextSteps = [
-      'Waiting for initial review',
-      'Check back in 24 hours',
+      'Your CorpID certificate is ready for download',
+      'You can now use CorpID for digital transactions',
     ];
   }
 
   return {
     refNumber,
     status,
-    lastUpdated: now,
-    statusHistory: [
-      {
-        status: 'pending',
-        timestamp: submittedDate,
-        description: 'Application submitted',
-      },
-      ...(status !== 'pending' ? [{
-        status: 'processing' as ApplicationStatus,
-        timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-        description: 'Application under review',
-      }] : []),
-      ...(status === 'approved' ? [{
-        status: 'approved' as ApplicationStatus,
-        timestamp: now,
-        description: 'CorpID approved and issued',
-      }] : []),
-    ],
+    statusMessage,
+    lastUpdated: new Date().toISOString(),
+    estimatedCompletion: status === 'approved' 
+      ? undefined 
+      : new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
     nextSteps,
-    corpId,
   };
 }
 
 /**
- * Verify a Business Registration Number
+ * Initiate iAM Smart authentication
  * 
- * @param brNumber - 8-digit BR number
- * @returns Promise resolving to verification result
+ * iAM Smart is Hong Kong's digital identity platform for individuals.
+ * CorpID uses iAM Smart for identity verification of company representatives.
+ * 
+ * @param redirectUri - Where to redirect after authentication
+ * @returns OAuth authorization URL
  */
-export async function verifyBRNumber(brNumber: string): Promise<VerificationResult> {
-  await simulateDelay();
+export function getIAMSmartAuthUrl(redirectUri: string): string {
+  const clientId = typeof import.meta !== 'undefined' 
+    ? (import.meta.env.VITE_IAMSMART_CLIENT_ID || 'mock_client_id')
+    : 'mock_client_id';
+  
+  const params = new URLSearchParams({
+    client_id: clientId,
+    redirect_uri: redirectUri,
+    response_type: 'code',
+    scope: 'openid profile email',
+    state: Math.random().toString(36).substring(7),
+  });
 
-  // Simulate network error
-  if (simulateNetworkError()) {
-    throw {
-      code: 'NETWORK_ERROR',
-      message: 'Unable to verify BR number. Please try again.',
-    } as ApiError;
-  }
+  return `${config.oauthUrl}/authorize?${params.toString()}`;
+}
 
-  // Validate format
-  if (!/^\d{8}$/.test(brNumber)) {
+/**
+ * Handle iAM Smart OAuth callback
+ * 
+ * @param code - Authorization code from iAM Smart
+ * @returns User information from iAM Smart
+ */
+export async function handleIAMSmartCallback(code: string): Promise<{
+  success: boolean;
+  user?: {
+    hkid?: string;
+    name?: string;
+    email?: string;
+  };
+  error?: string;
+}> {
+  await simulateDelay(1000);
+
+  // Mock implementation
+  // In production, exchange code for token and fetch user info
+  if (code) {
     return {
-      valid: false,
-      message: 'Invalid BR number format. Must be 8 digits.',
+      success: true,
+      user: {
+        name: 'Verified User',
+        email: 'verified@example.com',
+      },
     };
   }
 
-  // Simulate BR verification
-  // In production, this would call IRD API
-  // For demo, we'll return mock data for certain patterns
-  
-  // Demo: numbers starting with 1-8 are valid, 9 are invalid
-  if (brNumber.startsWith('9')) {
-    return {
-      valid: false,
-      message: 'Business Registration Number not found in registry.',
-    };
-  }
-
-  // Generate mock company data based on BR number
-  const companyTypes = [
-    'Limited Company',
-    'Sole Proprietorship',
-    'Partnership',
-    'Branch Office',
-  ];
-  
-  const typeIndex = parseInt(brNumber.charAt(0)) % companyTypes.length;
-  
   return {
-    valid: true,
-    companyName: `Sample Company ${brNumber.slice(-4)} Limited`,
-    companyNameZh: `示例公司 ${brNumber.slice(-4)} 有限公司`,
-    businessType: companyTypes[typeIndex],
-    registrationDate: '2020-01-15',
-    expiryDate: '2025-01-14',
-    message: 'Business Registration verified successfully.',
+    success: false,
+    error: 'Invalid authorization code',
   };
 }
 
+// ============================================================================
+// Utility Functions
+// ============================================================================
+
 /**
- * Validate Hong Kong ID Card format and checksum
- * 
- * @param idNumber - HKID in format A123456(7)
- * @returns boolean indicating if format is valid
+ * Format HKID for display (add spaces for readability)
  */
-export function validateHKIDFormat(idNumber: string): boolean {
-  // HKID format: 1-2 letters + 6 digits + check digit in parentheses
-  const hkidRegex = /^[A-Z]{1,2}\d{6}\(\d\)$/;
-  if (!hkidRegex.test(idNumber.toUpperCase())) {
-    return false;
-  }
-
-  // Validate checksum
-  // The check digit algorithm:
-  // 1. Convert letters to numbers (A=1, B=2, ..., Z=26)
-  // 2. For 1-letter IDs, use 36 as the first multiplier
-  // 3. Multiply each digit by decreasing weights (9, 8, 7, 6, 5, 4, 3, 2)
-  // 4. Sum and calculate remainder when divided by 11
-  // 5. Check digit = 11 - remainder (0 becomes A, 1 becomes 0)
-
-  const cleanId = idNumber.toUpperCase().replace(/[()]/g, '');
-  const letters = cleanId.match(/^[A-Z]+/)?.[0] || '';
-  const digits = cleanId.match(/\d+/g)?.join('') || '';
-  const checkDigit = parseInt(digits.slice(-1));
-
-  let sum = 0;
-  let weight = 9;
-
-  // Add letter values
-  for (let i = 0; i < letters.length; i++) {
-    sum += (letters.charCodeAt(i) - 64) * weight;
-    weight--;
-  }
-
-  // If single letter, add 36 * weight for position 1
-  if (letters.length === 1) {
-    sum += 36 * 8;
-    weight = 7;
-  }
-
-  // Add digit values
-  for (let i = 0; i < digits.length - 1; i++) {
-    sum += parseInt(digits[i]) * weight;
-    weight--;
-  }
-
-  const remainder = sum % 11;
-  let calculatedCheckDigit: number | string = 11 - remainder;
+export function formatHKID(hkid: string): string {
+  const cleaned = hkid.toUpperCase().replace(/\s/g, '');
+  const match = cleaned.match(/^([A-Z]{1,2})(\d{6})\((\d)\)$/);
   
-  if (calculatedCheckDigit === 11) calculatedCheckDigit = 0;
-  if (calculatedCheckDigit === 10) calculatedCheckDigit = 'A';
-
-  return calculatedCheckDigit === checkDigit || 
-         (typeof calculatedCheckDigit === 'string' && calculatedCheckDigit === 'A' && checkDigit === 10);
+  if (!match) return hkid;
+  
+  const [, letters, digits, checkDigit] = match;
+  
+  if (letters.length === 1) {
+    return `${letters} ${digits.slice(0, 3)} ${digits.slice(3)} (${checkDigit})`;
+  }
+  
+  return `${letters} ${digits.slice(0, 3)} ${digits.slice(3)} (${checkDigit})`;
 }
 
-// ============ Export Types and Functions ============
+/**
+ * Format BR number for display
+ */
+export function formatBRNumber(br: string): string {
+  const cleaned = br.replace(/\D/g, '');
+  if (cleaned.length !== 8) return br;
+  return `${cleaned.slice(0, 4)} ${cleaned.slice(4)}`;
+}
 
-export default {
-  submitApplication,
-  checkStatus,
-  verifyBRNumber,
-  validateHKIDFormat,
-};
+/**
+ * Get business type label in current language
+ */
+export function getBusinessTypeLabel(type: BusinessType, lang: 'en' | 'zh'): string {
+  const labels: Record<BusinessType, { en: string; zh: string }> = {
+    limited_company: { en: 'Limited Company', zh: '有限公司' },
+    sole_proprietorship: { en: 'Sole Proprietorship', zh: '獨資經營' },
+    partnership: { en: 'Partnership', zh: '合夥經營' },
+    branch_company: { en: 'Branch of Foreign Company', zh: '海外公司分公司' },
+    other: { en: 'Other', zh: '其他' },
+  };
+  
+  return labels[type]?.[lang] || type;
+}
+
+/**
+ * Get applicant role label in current language
+ */
+export function getApplicantRoleLabel(role: ApplicantRole, lang: 'en' | 'zh'): string {
+  const labels: Record<ApplicantRole, { en: string; zh: string }> = {
+    director: { en: 'Company Director', zh: '公司董事' },
+    owner: { en: 'Business Owner', zh: '業務擁有人' },
+    partner: { en: 'Partner', zh: '合夥人' },
+    authorized_representative: { en: 'Authorized Representative', zh: '獲授權代表' },
+  };
+  
+  return labels[role]?.[lang] || role;
+}
+
+/**
+ * Get status label in current language
+ */
+export function getStatusLabel(status: CorpIDApplicationStatus, lang: 'en' | 'zh'): string {
+  const labels: Record<CorpIDApplicationStatus, { en: string; zh: string }> = {
+    draft: { en: 'Draft', zh: '草稿' },
+    submitted: { en: 'Submitted', zh: '已提交' },
+    verifying: { en: 'Verifying', zh: '驗證中' },
+    pending_documents: { en: 'Pending Documents', zh: '待補文件' },
+    pending_verification: { en: 'Pending Verification', zh: '待驗證' },
+    approved: { en: 'Approved', zh: '已批准' },
+    rejected: { en: 'Rejected', zh: '已拒絕' },
+  };
+  
+  return labels[status]?.[lang] || status;
+}
+
+// Export the API client instance
+export const corpidClient = new CorpIDAPIClient();

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './i18n/LanguageContext';
-import { BrandingProvider } from './config/branding';
+import { BrandingProvider } from './config/branding.tsx';
 import { AuthProvider } from './lib/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import PricingPage from './pages/PricingPage';
 import AboutPage from './pages/AboutPage';
+import BrandingPreviewPage from './pages/BrandingPreviewPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
                   <Route path="/dashboard" element={<DashboardPage />} />
                   <Route path="/pricing" element={<PricingPage />} />
                   <Route path="/about" element={<AboutPage />} />
+                  <Route path="/admin/branding" element={<BrandingPreviewPage />} />
                 </Routes>
               </main>
               <Footer />

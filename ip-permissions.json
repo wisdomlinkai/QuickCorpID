@@ -1,0 +1,11 @@
+{
+    "IpProtocol":  "tcp",
+    "ToPort":  5432,
+    "FromPort":  5432,
+    "UserIdGroupPairs":  [
+                             {
+                                 "UserId":  "240966654973",
+                                 "GroupId":  "sg-09ef614e63a71b755"
+                             }
+                         ]
+}

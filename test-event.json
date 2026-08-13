@@ -1,0 +1,9 @@
+{
+  "httpMethod": "GET",
+  "path": "/health",
+  "requestContext": {
+    "http": {
+      "method": "GET"
+    }
+  }
+}

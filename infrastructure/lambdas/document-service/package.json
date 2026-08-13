@@ -1,0 +1,12 @@
+{
+  "name": "document-service-lambda",
+  "version": "1.0.0",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
+    "@aws-sdk/client-secrets-manager": "^3.0.0",
+    "@aws-sdk/s3-request-presigner": "^3.0.0",
+    "pg": "^8.11.0",
+    "uuid": "^10.0.0",
+    "zod": "^3.22.0"
+  }
+}
