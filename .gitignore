@@ -21,3 +21,10 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Deployment artifacts
+deployment.tar.gz
+deployment-bucket-policy.json
+cognito-update.json
+custom-rules.json
+custom-headers.yaml
