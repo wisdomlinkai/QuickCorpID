@@ -1,9 +1,9 @@
 export const translations = {
   en: {
-    nav: { home: 'Home', register: 'Register', dashboard: 'Dashboard', pricing: 'Pricing', about: 'About' },
+    nav: { home: 'Home', login: 'Login', register: 'Register', dashboard: 'Dashboard', pricing: 'Pricing', about: 'About' },
     hero: { title: 'Register CorpID in 5 Minutes', subtitle: 'The easiest way for Hong Kong SMEs to get their Digital Corporate Identity', cta: 'Free Registration', learnMore: 'Learn More' },
     benefits: {
-      title: 'Why CorpID QuickStart?', subtitle: 'Built specifically for Hong Kong businesses',
+      title: 'Why iBiz Smart?', subtitle: 'Built specifically for Hong Kong businesses',
       items: [
         { title: 'Quick & Easy', description: 'Complete your registration in just 5 minutes', icon: 'zap' },
         { title: 'Government Approved', description: 'Integrated with CorpID Sandbox', icon: 'shield' },
@@ -34,8 +34,8 @@ export const translations = {
     },
     dashboard: { welcome: 'Welcome', corpIdStatus: 'CorpID Status', status: { draft: 'Draft', pending: 'Pending Review', processing: 'Processing', approved: 'Approved', rejected: 'Rejected' }, statusDesc: { draft: 'Application not yet submitted', pending: 'Application being reviewed', processing: 'Application is processing', approved: 'CorpID is active', rejected: 'Contact support' }, quickActions: 'Quick Actions', actions: { digitalSign: 'Digital Sign', digitalSignDesc: 'Sign documents', viewDocs: 'View Documents', viewDocsDesc: 'Access documents', renewAuth: 'Renew Authorization', renewAuthDesc: 'Update authorizations' }, reminders: 'Reminders', remindersItems: ['Complete profile', 'Add representatives', 'Link bank account'], upgradeBanner: { title: 'Upgrade to Premium', desc: 'Get priority support and more', btn: 'View Plans' }, refNumber: 'Reference Number', submittedOn: 'Submitted on' },
     pricing: { title: 'Simple Pricing', subtitle: 'Choose your plan', free: { name: 'Free', price: '$0', period: 'forever', desc: 'Perfect for getting started', features: ['CorpID Registration', 'Basic Dashboard', 'Digital Signing (limited)', 'Email Support', '1 Business Entity'], cta: 'Get Started' }, premium: { name: 'Premium', price: '$199', period: '/month', desc: 'For growing businesses', features: ['Everything in Free', 'Priority Registration', 'Unlimited Signing', 'Multiple Entities', 'API Access', 'Priority Support'], cta: 'Upgrade', badge: 'Most Popular' }, enterprise: { name: 'Enterprise', price: 'Custom', period: '', desc: 'For large organizations', features: ['Everything in Premium', 'Custom Integration', 'Dedicated Manager', 'SLA Guarantee'], cta: 'Contact Sales' }, comingSoon: 'Coming Soon', comingSoonDesc: 'Premium plans available soon' },
-    about: { title: 'About CorpID QuickStart HK', subtitle: 'Helping Hong Kong businesses go digital', mission: { title: 'Our Mission', desc: 'Making digital government services accessible for every Hong Kong business.' }, whatIsCorpId: { title: 'What is CorpID?', desc: 'CorpID is the Digital Policy Office initiative for secure business digital identity.', benefits: ['Single identity for government services', 'Secure digital signing', 'Streamlined transactions', 'Reduced paperwork'] }, team: { title: 'Built for Hong Kong', desc: 'Bilingual, mobile-friendly solution for local businesses.' }, contact: { title: 'Contact Us', email: 'support@corpidquickstart.hk', phone: '+852 1234 5678' } },
-    footer: { product: 'Product', support: 'Support', legal: 'Legal', terms: 'Terms', privacy: 'Privacy', contact: 'Contact', copyright: '© 2024 CorpID QuickStart HK', tagline: 'Digital identity made simple' },
+    about: { title: 'About iBiz Smart 智企通', subtitle: 'Helping Hong Kong businesses go digital', mission: { title: 'Our Mission', desc: 'Making digital government services accessible for every Hong Kong business.' }, whatIsCorpId: { title: 'What is CorpID?', desc: 'CorpID is the Digital Policy Office initiative for secure business digital identity.', benefits: ['Single identity for government services', 'Secure digital signing', 'Streamlined transactions', 'Reduced paperwork'] }, team: { title: 'Built for Hong Kong', desc: 'Bilingual, mobile-friendly solution for local businesses.' }, contact: { title: 'Contact Us', email: 'support@ibizsmart.hk', phone: '+852 1234 5678' } },
+    footer: { product: 'Product', support: 'Support', legal: 'Legal', terms: 'Terms', privacy: 'Privacy', contact: 'Contact', copyright: '© 2026 iBiz Smart 智企通', tagline: 'Smart Enterprise Connection' },
     common: { loading: 'Loading...', error: 'Error', edit: 'Edit', close: 'Close', secure: 'Secure' },
     errors: { 
       required: 'This field is required', 
@@ -54,10 +54,10 @@ export const translations = {
     },
   },
   zh: {
-    nav: { home: '首頁', register: '註冊', dashboard: '儀表板', pricing: '定價', about: '關於我們' },
+    nav: { home: '首頁', login: '登入', register: '註冊', dashboard: '儀表板', pricing: '定價', about: '關於我們' },
     hero: { title: '輕鬆註冊 CorpID，5 分鐘搞定', subtitle: '香港中小企業取得數碼企業身份的最簡單方法', cta: '免費註冊', learnMore: '了解更多' },
     benefits: {
-      title: '為何選擇 CorpID QuickStart？', subtitle: '專為香港企業而設',
+      title: '為何選擇智企通？', subtitle: '專為香港企業而設',
       items: [
         { title: '快速簡易', description: '只需5分鐘完成註冊', icon: 'zap' },
         { title: '政府認可', description: '與 CorpID 沙盒整合', icon: 'shield' },
@@ -88,8 +88,8 @@ export const translations = {
     },
     dashboard: { welcome: '歡迎', corpIdStatus: 'CorpID 狀態', status: { draft: '草稿', pending: '審核中', processing: '處理中', approved: '已核准', rejected: '被拒絕' }, statusDesc: { draft: '申請尚未提交', pending: '申請正在審核', processing: '申請處理中', approved: 'CorpID 已啟用', rejected: '請聯絡支援' }, quickActions: '快速操作', actions: { digitalSign: '數碼簽署', digitalSignDesc: '數碼簽署文件', viewDocs: '查看文件', viewDocsDesc: '存取文件', renewAuth: '續期授權', renewAuthDesc: '更新授權' }, reminders: '提醒事項', remindersItems: ['完成個人資料', '新增授權代表', '連結銀行帳戶'], upgradeBanner: { title: '升級至高級版', desc: '獲得優先支援及更多', btn: '查看計劃' }, refNumber: '參考編號', submittedOn: '提交日期' },
     pricing: { title: '簡單透明的定價', subtitle: '選擇適合的計劃', free: { name: '免費版', price: '$0', period: '永久', desc: '開始使用的完美選擇', features: ['CorpID 註冊', '基本儀表板', '數碼簽署（有限）', '電郵支援', '1個企業實體'], cta: '免費開始' }, premium: { name: '高級版', price: '$199', period: '/月', desc: '適合成長中的企業', features: ['包含免費版所有功能', '優先註冊', '無限數碼簽署', '多個企業實體', 'API存取', '優先支援'], cta: '升級', badge: '最受歡迎' }, enterprise: { name: '企業版', price: '自訂', period: '', desc: '適合大型機構', features: ['包含高級版功能', '自訂整合', '專屬客戶經理', 'SLA保證'], cta: '聯絡銷售' }, comingSoon: '即將推出', comingSoonDesc: '高級計劃即將推出' },
-    about: { title: '關於 CorpID QuickStart HK', subtitle: '協助香港企業數碼化', mission: { title: '我們的使命', desc: '讓每間香港企業都能輕易使用政府數碼服務。' }, whatIsCorpId: { title: '甚麼是 CorpID？', desc: 'CorpID 是數碼政策辦公室的企業數碼身份計劃。', benefits: ['單一數碼身份適用政府服務', '安全的數碼簽署', '簡化的商業交易', '減少文書工作'] }, team: { title: '為香港而建', desc: '雙語、流動友善的本地化解決方案。' }, contact: { title: '聯絡我們', email: 'support@corpidquickstart.hk', phone: '+852 1234 5678' } },
-    footer: { product: '產品', support: '支援', legal: '法律', terms: '條款', privacy: '私隱', contact: '聯絡', copyright: '© 2024 CorpID QuickStart HK', tagline: '數碼身份變簡單' },
+    about: { title: '關於智企通 iBiz Smart', subtitle: '協助香港企業數碼化', mission: { title: '我們的使命', desc: '讓每間香港企業都能輕易使用政府數碼服務。' }, whatIsCorpId: { title: '甚麼是 CorpID？', desc: 'CorpID 是數碼政策辦公室的企業數碼身份計劃。', benefits: ['單一數碼身份適用政府服務', '安全的數碼簽署', '簡化的商業交易', '減少文書工作'] }, team: { title: '為香港而建', desc: '雙語、流動友善的本地化解決方案。' }, contact: { title: '聯絡我們', email: 'support@ibizsmart.hk', phone: '+852 1234 5678' } },
+    footer: { product: '產品', support: '支援', legal: '法律', terms: '條款', privacy: '私隱', contact: '聯絡', copyright: '© 2026 智企通 iBiz Smart', tagline: '智能企業身份，簡單便捷' },
     common: { loading: '載入中...', error: '錯誤', edit: '編輯', close: '關閉', secure: '安全' },
     errors: { 
       required: '此欄位為必填', 

@@ -56,13 +56,13 @@ export interface BrandingConfig {
   };
 }
 
-// ============ Default CorpID QuickStart Branding ============
+// ============ Default iBiz Smart Branding ============
 
 export const defaultBranding: BrandingConfig = {
-  companyName: 'CorpID QuickStart HK',
-  companyNameZh: 'CorpID QuickStart HK',
-  tagline: 'Digital identity made simple',
-  taglineZh: '數碼身份變簡單',
+  companyName: 'iBiz Smart',
+  companyNameZh: '智企通',
+  tagline: 'Smart Enterprise Connection',
+  taglineZh: '智能企業身份，簡單便捷',
   
   colors: {
     primary: '#2563eb', // blue-600
@@ -80,12 +80,12 @@ export const defaultBranding: BrandingConfig = {
   },
   
   contact: {
-    email: 'support@corpidquickstart.hk',
+    email: 'support@ibizsmart.hk',
     phone: '+852 1234 5678',
   },
   
   footer: {
-    copyright: '© 2024 CorpID QuickStart HK',
+    copyright: '© 2026 iBiz Smart 智企通',
   },
   
   features: {

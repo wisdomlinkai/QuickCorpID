@@ -15,6 +15,7 @@ const Navbar = () => {
   // Build nav items based on branding feature flags
   const navItems = [
     { path: '/', label: t.nav.home, show: true },
+    { path: '/login', label: t.nav.login, show: true },
     { path: '/register', label: t.nav.register, show: true },
     { path: '/dashboard', label: t.nav.dashboard, show: true },
     { path: '/pricing', label: t.nav.pricing, show: branding?.features?.showPricingPage ?? true },
