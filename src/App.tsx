@@ -10,6 +10,8 @@ import SignupPage from './pages/SignupPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import NewDashboardPage from './pages/NewDashboardPage';
+import CorpIDPage from './pages/CorpIDPage';
+import DocumentsPage from './pages/DocumentsPage';
 import OrganisationPage from './pages/OrganisationPage';
 import PricingPage from './pages/PricingPage';
 import AboutPage from './pages/AboutPage';
@@ -61,6 +63,22 @@ function App() {
                     element={
                       <ProtectedRoute>
                         <OrganisationPage />
+                      </ProtectedRoute>
+                    } 
+                  />
+                  <Route 
+                    path="/corpid" 
+                    element={
+                      <ProtectedRoute>
+                        <CorpIDPage />
+                      </ProtectedRoute>
+                    } 
+                  />
+                  <Route 
+                    path="/documents" 
+                    element={
+                      <ProtectedRoute>
+                        <DocumentsPage />
                       </ProtectedRoute>
                     } 
                   />
