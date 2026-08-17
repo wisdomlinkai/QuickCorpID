@@ -258,11 +258,11 @@ export default function DocumentsPage() {
             {documents.map((doc) => (
               <div
                 key={doc.id}
-                className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-shadow"
+                className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-teal-500 rounded-xl flex items-center justify-center text-white">
-                    <File className="w-6 h-6" />
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center text-white shadow-lg">
+                    <File className="w-7 h-7" />
                   </div>
                   <div className="flex items-center gap-1">
                     <span

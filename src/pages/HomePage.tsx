@@ -54,9 +54,9 @@ const HomePage = () => {
             {t.benefits.items.map((item, index) => {
               const Icon = benefitIcons[item.icon] || Shield;
               return (
-                <div key={index} className="group p-6 bg-gradient-to-br from-slate-50 to-white rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-teal-100 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                    <Icon className="w-7 h-7 text-blue-600" />
+                <div key={index} className="group p-8 bg-white rounded-2xl border border-slate-100 hover:border-blue-300 hover:shadow-xl transition-all duration-300">
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 transition-transform">
+                    <Icon className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold text-slate-800 mb-2">{item.title}</h3>
                   <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
@@ -76,8 +76,8 @@ const HomePage = () => {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[{ icon: Building2, item: t.targetUsers.items[0] }, { icon: User, item: t.targetUsers.items[1] }, { icon: UtensilsCrossed, item: t.targetUsers.items[2] }, { icon: Car, item: t.targetUsers.items[3] }].map(({ icon: Icon, item }, index) => (
-              <div key={index} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow text-center">
-                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-teal-400 to-blue-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+              <div key={index} className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300 text-center">
+                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center mb-5 shadow-lg">
                   <Icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold text-slate-800 mb-1">{item.title}</h3>
